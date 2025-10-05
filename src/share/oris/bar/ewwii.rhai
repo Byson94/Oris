@@ -14,11 +14,24 @@ fn render(wsp_info, time) {
 
 fn left(ws_info) {
     let ws_info = parse_json(ws_info);
+    let ws_buttons = [];
     for i in 1..10 {
         let key = "workspace_" + i;
         if ws_info[key] == () {
             ws_info[key] = "·";
         }
+
+        let onclick = "";
+        let icon = ws_info[key];
+
+        if icon != "⨂" {
+            onclick = `niri msg action focus-workspace ${i}`
+        }
+
+        ws_buttons.push(
+            button(#{ onclick: onclick, label: ws_info[key] })
+        )
+
     }
 
     box(#{
@@ -42,18 +55,7 @@ fn left(ws_info) {
             space_evenly: false,
             halign: "start",
             spacing: 5,
-        }, [
-            button(#{ onclick: "hyprctl dispatch workspace 1", label: ws_info["workspace_1"] }),
-            button(#{ onclick: "hyprctl dispatch workspace 2", label: ws_info["workspace_2"] }),
-            button(#{ onclick: "hyprctl dispatch workspace  3", label: ws_info["workspace_3"] }),
-            button(#{ onclick: "hyprctl dispatch workspace  4", label: ws_info["workspace_4"] }),
-            button(#{ onclick: "hyprctl dispatch workspace  5", label: ws_info["workspace_5"] }),
-            button(#{ onclick: "hyprctl dispatch workspace  6", label: ws_info["workspace_6"] }),
-            button(#{ onclick: "hyprctl dispatch workspace  7", label: ws_info["workspace_7"] }),
-            button(#{ onclick: "hyprctl dispatch workspace  8", label: ws_info["workspace_8"] }),
-            button(#{ onclick: "hyprctl dispatch workspace  9", label: ws_info["workspace_9"] }),
-            button(#{ onclick: "hyprctl dispatch workspace  10", label: ws_info["workspace_10"] }),
-        ])
+        }, ws_buttons)
     ])
 }
 
@@ -62,6 +64,7 @@ fn center() {
         cursor: "pointer",
         halign: "center",
         class: "search-btn",
+        onclick: "scripts/app_menu_popup",
     }, [ 
         label(#{ text: "  Application menu" }) 
     ])
@@ -163,6 +166,15 @@ fn render_cal(day, year) {
     ])
 }
 
+fn render_app_menu() {
+    box(#{ orientation: "v" }, [
+        box(#{ orientation: "h", space_evenly: false }, [
+            label(#{ text: "Search: " }),
+            input(#{ })
+        ])
+    ])
+}
+
 enter([
     listen("wsp_info", #{ initial: "{}", cmd: "scripts/workspace" }),
     poll("time", #{ initial: "", cmd: "date +%H:%M", interval: "10s" }),
@@ -204,7 +216,6 @@ enter([
         monitor: 0,
     }, render_sidebar(volume, uptime, date)),
 
-    // Bottom dock
     defwindow("calendar_popup", #{
         geometry: #{
             x: "175px",
@@ -215,4 +226,13 @@ enter([
         },
         windowtype: "dialog",
     }, render_cal(day, year)),
+
+    defwindow("application_menu", #{
+        geometry: #{
+            anchor: "top center",
+            width: "270px",
+            height: "60px"
+        },
+        focusable: "exclusive",
+    }, render_app_menu()),
 ]);

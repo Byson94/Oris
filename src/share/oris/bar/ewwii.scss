@@ -200,6 +200,14 @@ calendar:indeterminate {
   color: #bfc9db;
 }
 
+// == Application menu == //
+.application_menu {
+  background: $background-color;
+  padding: 15px;
+  border-radius: 50px;
+  border: 2px solid $background-color-light;
+}
+
 // == Animations == //
 @keyframes SlideInBottom {
   0% {
