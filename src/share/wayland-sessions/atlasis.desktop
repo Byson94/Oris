@@ -1,0 +1,6 @@
+[Desktop Entry]
+Name=Atlasis
+Comment=Atlasis desktop environment
+Exec=atlasis
+Type=Application
+DesktopNames=Atlasis

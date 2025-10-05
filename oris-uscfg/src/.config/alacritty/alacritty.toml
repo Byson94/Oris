@@ -1,0 +1,27 @@
+[window]
+padding.x = 10
+padding.y = 10
+startup_mode = "Maximized"
+opacity = 0.9
+
+[colors.primary]
+background = "#181e2c"
+foreground = "#D8DADC"
+
+[font]
+normal.family = "FiraCode Nerd Font"
+# also good
+# normal.family = "Hack Nerd Font"
+normal.style = "Bold"
+size = 10.0
+
+[cursor]
+unfocused_hollow = false
+blink_interval = 500
+
+[cursor.style]
+blinking = "Always"
+shape = "Block"
+
+[env]
+TERM = "xterm-256color"

@@ -1,0 +1,20 @@
+#!/bin/bash
+
+STATEFILE="$XDG_RUNTIME_DIR/ewwii_sidebar_popup_state"
+
+if [[ -f $STATEFILE ]]; then
+  last_state=$(cat $STATEFILE)
+else
+  last_state="closed"
+fi
+
+if [[ $last_state == "open" ]]; then
+  ewwii close extra-sidebar --config .
+  echo "closed" >$STATEFILE
+else
+  ewwii open extra-sidebar --config .
+  echo "open" >$STATEFILE
+fi
+sleep 0.2
+
+

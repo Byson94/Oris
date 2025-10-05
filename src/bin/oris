@@ -1,0 +1,42 @@
+#!/bin/bash
+
+set -e
+
+VERSION="0.1.0"
+
+print_help() {
+  cat <<EOF
+Oris Desktop Environment - Launcher
+
+Usage:
+  oris [OPTION]
+
+Options:
+  --help        Show this help message and exit
+  --version     Print version information
+EOF
+}
+
+case "$1" in
+--help | -h)
+  print_help
+  exit 0
+  ;;
+--version | -v)
+  echo "Oris version $VERSION © 2025 Byson94 and contributors"
+  exit 0
+  ;;
+"")
+  export XDG_CURRENT_DESKTOP="Oris"
+  export DESKTOP_SESSION="oris"
+
+  systemctl --user import-environment XDG_CURRENT_DESKTOP DESKTOP_SESSION
+
+  niri
+  ;;
+*)
+  echo "Unknown option: $1"
+  echo "Use --help for usage."
+  exit 1
+  ;;
+esac
