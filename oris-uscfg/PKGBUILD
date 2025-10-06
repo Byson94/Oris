@@ -3,7 +3,7 @@ pkgver="0.1"
 pkgrel="1"
 pkgdesc="Custom configuration and looks for oris desktop environment"
 arch=("x86_64")
-depend=("oris" "hyprland")
+depend=("oris" "niri")
 
 package() {
   mkdir -p ${pkgdir}/etc/skel/
