@@ -1,7 +1,7 @@
 pkgname="oris-uscfg"
 pkgver="0.1"
 pkgrel="1"
-pkgdesc="Custom configuration and looks for atlasis desktop environment"
+pkgdesc="Custom configuration and looks for oris desktop environment"
 arch=("x86_64")
 depend=("oris" "hyprland")
 
@@ -9,4 +9,3 @@ package() {
   mkdir -p ${pkgdir}/etc/skel/
   cp -r ${srcdir}/.config/ ${pkgdir}/etc/skel/
 }
-
