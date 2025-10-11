@@ -168,9 +168,14 @@ fn render_cal(day, year) {
 
 fn render_app_menu() {
     box(#{ orientation: "v" }, [
-        box(#{ orientation: "h", space_evenly: false }, [
-            label(#{ text: "Search: " }),
-            input(#{ })
+        eventbox(#{
+            // 9 = Escape
+            onkeypress: "if [ {} == '9' ]; then scripts/app_menu_popup; fi"
+        }, [
+            box(#{ orientation: "h", space_evenly: false }, [
+                label(#{ text: "Search: " }),
+                input(#{ })
+            ])
         ])
     ])
 }
