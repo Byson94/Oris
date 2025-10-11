@@ -8,6 +8,6 @@ It is still under development and it is not expected to work properly under any 
 
 - [x] Niri Confs
 - [x] Bar
-- [ ] Terminal
+- [x] Terminal
 - [ ] Shell
-- [ ] Animations
+- [x] Animations

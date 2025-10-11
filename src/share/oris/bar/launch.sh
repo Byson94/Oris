@@ -1,4 +1,7 @@
 #!/bin/bash
 
-ewwii open bar --config ~/Desktop/astatine/config/ewwii/
-# ewwii open bottom-dock --config ~/Desktop/astatine/config/ewwii/
+# or with the correct path
+CFG=/usr/share/oris/bar/
+
+ewwii daemon --config "$CFG" &
+ewwii open bar --config "$CFG"

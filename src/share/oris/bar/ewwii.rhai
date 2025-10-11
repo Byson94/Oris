@@ -104,7 +104,7 @@ fn draw_slider(icon, onchange, value) {
         box(#{ class: "label" }, [
             label(#{ text: icon }),
         ]),
-        slider(#{
+        scale(#{
             min: 0,
             max: 101,
             value: value,
