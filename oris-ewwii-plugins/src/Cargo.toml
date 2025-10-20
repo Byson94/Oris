@@ -1,10 +1,10 @@
 [package]
-name = "src"
+name = "oris-ewwii-plugins"
 version = "0.1.0"
 edition = "2024"
 
 [lib]
-crate-type = "cdylib"
+crate-type = ["cdylib"]
 
 [dependencies]
-ewwii_plugin_api = "0.3.0"
+ewwii_plugin_api = { version = "0.6.1", default-features = false, features = ["include-rhai"] }

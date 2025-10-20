@@ -1,13 +1,18 @@
 import "std::env" as env;
+import "api::slib" as slib;
 
 fn render(wsp_info, time) {
-    return box(#{ orientation: "h" }, [
+    return box(#{ orientation: "h", 
+    }, [
         box(#{
-            class: "top-bar"
+            class: "top-bar",
         }, [
-            left(wsp_info),
-            center(),
-            right(time),
+            box(#{}, [
+                left(wsp_info),
+                center(),
+                right(time),
+
+            ])
         ])
     ])
 }
@@ -184,7 +189,7 @@ enter([
     listen("wsp_info", #{ initial: "{}", cmd: "scripts/workspace" }),
     poll("time", #{ initial: "", cmd: "date +%H:%M", interval: "10s" }),
     poll("date", #{ initial: "", cmd: "date +%d/%m/%Y", interval: "24h" }),
-    poll("uptime", #{ initial: "0", cmd: "cat /proc/uptime", interval: "1m" }),
+    poll("uptime", #{ initial: "0", cmd: "cat /proc/uptime", interval: "2m" }),
     listen("volume", #{ initial: "", cmd: "scripts/getvol" }),
     poll("day", #{ interval: "20h", cmd: "date '+%d'" }),
     poll("year", #{ interval: "20h", cmd: "date '+%Y'" }),
