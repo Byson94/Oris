@@ -1,5 +1,6 @@
 import "std::env" as env;
 import "api::slib" as slib;
+import "widgets/time" as _time;
 
 fn render(wsp_info, time) {
     return box(#{ orientation: "h", 

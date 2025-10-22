@@ -8,4 +8,4 @@ enter([
         stacking: "bg",
         monitor: 0,
 	}, render_time(time))
-])
+]);

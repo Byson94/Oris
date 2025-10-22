@@ -1,0 +1,23 @@
+pkgname="oris-ewwii-plugins"
+pkgver="0.1.0"
+pkgrel=1
+pkgdesc="Ewwii plugins for the Oris desktop environment"
+arch=("x86_64")
+url="https://example.com/oris-ewwii-plugins"
+license=("MIT")
+depends=("ewwii" "oris")
+makedepends=("cargo")
+
+source=("$pkgname-$pkgver.tar.gz")
+sha256sums=("SKIP")
+
+build() {
+  cd "$srcdir/$pkgname-$pkgver"
+  cargo build --release --locked
+}
+
+package() {
+  cd "$srcdir/$pkgname-$pkgver"
+  install -Dm755 "target/release/liboris_ewwii_plugins.so" \
+    "$pkgdir/usr/lib/oris/plugins/liboris_ewwii_plugins.so"
+}
