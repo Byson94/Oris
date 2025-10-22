@@ -257,7 +257,7 @@ layout {
 // which may be more convenient to use.
 // See the binds section below for more spawn examples.
 
-spawn-at-startup "/usr/share/oris/bar/launch.sh"
+spawn-at-startup "/usr/share/oris/ewwii/launch.sh"
 spawn-at-startup "swww-daemon"
 
 // Uncomment this line to ask the clients to omit their client-side decorations if possible.
