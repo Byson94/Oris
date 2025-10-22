@@ -4,7 +4,7 @@ fn render_time(time) {
 
 enter([
 	defwindow("time", #{
-		geometry: #{ y: "30%", anchor: "top center" },
+		geometry: #{ anchor: "center" },
         stacking: "bg",
         monitor: 0,
 	}, render_time(time))

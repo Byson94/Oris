@@ -169,10 +169,12 @@ $dark-calendar-highlight: #d35d6e;
 // == Time styles == //
 .time {
   font-size: 100px;
-  background-color: rgba($background-color, 90%);
+  font-weight: bold;
   padding: 10px;
   border-radius: 15px;
-  border: 2px solid $background-color-light;
+  background-color: rgba($background-color, 20%);
+  border: 2px solid rgba($background-color-light, 20%);
+  margin-bottom: 38px;
 }
 
 // == calendar styles == //
@@ -221,12 +223,28 @@ calendar:indeterminate {
 }
 
 // == Application menu == //
-.application_menu {
+.app-menu-searchbar, .app-menu-content {
   background: $background-color;
   padding: 15px;
   border-radius: 50px;
   border: 2px solid $background-color-light;
   animation: FadeIn 0.2s linear forwards;
+}
+
+.app-menu-content {
+  margin-top: 10px;
+  border-radius: 10px;
+}
+
+.app-menu-list-item {
+  background-color: lighten($background-color, 15%);
+  padding: 10px;
+  border-radius: 10px;
+  margin: 5px 0px;
+}
+
+.app-menu-list-item:hover {
+  background-color: lighten($background-color, 10%);
 }
 
 // == Animations == //

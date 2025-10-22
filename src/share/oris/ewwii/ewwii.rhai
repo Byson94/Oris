@@ -1,6 +1,6 @@
 import "std::env" as env;
-import "api::slib" as slib;
 import "widgets/time" as _time;
+import "widgets/app_menu" as _app_menu;
 
 fn render(wsp_info, time) {
     return box(#{ orientation: "h", 
@@ -237,13 +237,4 @@ enter([
         },
         windowtype: "dialog",
     }, render_cal(day, year)),
-
-    defwindow("application_menu", #{
-        geometry: #{
-            anchor: "top center",
-            width: "270px",
-            height: "60px"
-        },
-        focusable: "exclusive",
-    }, render_app_menu()),
 ]);
