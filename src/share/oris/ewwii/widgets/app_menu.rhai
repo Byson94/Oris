@@ -5,12 +5,14 @@ fn render_app_menu() {
 
     let app_widget = [];
 
-    for app in init_app_list {
-        app_widget.push(
-            eventbox(#{ class: "app-menu-list-item", cursor: "pointer" }, [
-                label(#{ text: app, halign: "start" })
-            ])
-        );
+    if init_app_list != () {
+        for app in init_app_list {
+            app_widget.push(
+                eventbox(#{ class: "app-menu-list-item", cursor: "pointer" }, [
+                    label(#{ text: app, halign: "start" })
+                ])
+            );
+        }
     }
 
     box(#{ orientation: "v", space_evenly: false }, [

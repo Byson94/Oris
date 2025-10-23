@@ -12,7 +12,6 @@ fn render(wsp_info, time) {
                 left(wsp_info),
                 center(),
                 right(time),
-
             ])
         ])
     ])

@@ -15,4 +15,3 @@ ewwii daemon -c "$CFG" &
 ewwii set-plugin "$PLUGIN" -c "$CFG"
 ewwii open bar -c "$CFG"
 ewwii open time -c "$CFG"
-
