@@ -11,6 +11,6 @@ if [[ ! -f "$PLUGIN" ]]; then
   exit 1
 fi
 
-ewwii daemon -c "$CFG" --with-plugin "$CFG" &
+ewwii daemon -c "$CFG" --with-plugin "$PLUGIN" &
 ewwii open bar -c "$CFG"
 ewwii open time -c "$CFG"
