@@ -4,14 +4,20 @@ fn render_app_menu() {
     let init_app_list = slib::call_fn("app_list", []);
 
     let app_widget = [];
+    let index = 0;
 
     if init_app_list != () {
         for app in init_app_list {
             app_widget.push(
-                eventbox(#{ class: "app-menu-list-item", cursor: "pointer" }, [
-                    label(#{ text: app, halign: "start" })
+                eventbox(#{ class: "app-menu-list-item", cursor: "pointer", widget_name: app }, [
+                    label(#{ 
+                        text: app, 
+                        halign: "start", 
+                        focusable: true,
+                    })
                 ])
             );
+            index = index + 1
         }
     }
 
@@ -32,7 +38,15 @@ fn render_app_menu() {
             height: 300,
             vscroll: true,
             hscroll: false
-        }, [box(#{ orientation: "v" }, app_widget)])
+        }, [                    
+            flowbox(#{
+                onaccept: "notify-send {}",
+                selection_model: "single",
+                class: "app-menu-list-item-flow",
+                focusable: true,
+                default_select: 0
+            }, app_widget)
+        ])
     ])
 }
 

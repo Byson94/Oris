@@ -247,6 +247,10 @@ calendar:indeterminate {
   background-color: lighten($background-color, 10%);
 }
 
+flowboxchild:selected > .app-menu-list-item {
+  background-color: lighten($background-color, 5%);
+}
+
 // == Animations == //
 @keyframes SlideInBottom {
   0% {
