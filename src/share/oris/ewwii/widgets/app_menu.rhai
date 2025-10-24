@@ -6,19 +6,17 @@ fn render_app_menu() {
     let app_widget = [];
     let index = 0;
 
-    if init_app_list != () {
-        for app in init_app_list {
-            app_widget.push(
-                eventbox(#{ class: "app-menu-list-item", cursor: "pointer", widget_name: app }, [
-                    label(#{ 
-                        text: app, 
-                        halign: "start", 
-                        focusable: true,
-                    })
-                ])
-            );
-            index = index + 1
-        }
+    for app in init_app_list {
+        app_widget.push(
+            eventbox(#{ class: "app-menu-list-item", cursor: "pointer", widget_name: app }, [
+                label(#{ 
+                    text: app, 
+                    halign: "start", 
+                    focusable: true,
+                })
+            ])
+        );
+        index = index + 1
     }
 
     box(#{ orientation: "v", space_evenly: false }, [
