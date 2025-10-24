@@ -19,31 +19,37 @@ fn render_app_menu() {
         index = index + 1
     }
 
-    box(#{ orientation: "v", space_evenly: false }, [
-        eventbox(#{
-            // 9 = Escape
-            onkeypress: "if [ {} == '9' ]; then scripts/app_menu_popup; fi",
-            class: "app-menu-searchbar"
-        }, [
-            box(#{ orientation: "h", space_evenly: false }, [
-                label(#{ text: "Search: " }),
-                input(#{ onchange: "" })
+    eventbox(#{ 
+        orientation: "v", 
+        // 9 == Escape
+        onkeypress: "if [ {} == '9' ]; then scripts/app_menu_popup; fi", 
+    }, [
+        box(#{ orientation: "v", space_evenly: false }, [
+            box(#{
+                // 9 = Escape
+                onkeypress: "if [ {} == '9' ]; then scripts/app_menu_popup; fi",
+                class: "app-menu-searchbar"
+            }, [
+                box(#{ orientation: "h", space_evenly: false }, [
+                    label(#{ text: "Search: " }),
+                    input(#{ onchange: "" })
+                ])
+            ]),
+            scroll(#{
+                orientation: "v",
+                class: "app-menu-content",
+                height: 300,
+                vscroll: true,
+                hscroll: false
+            }, [                    
+                flowbox(#{
+                    onaccept: "notify-send {}",
+                    selection_model: "single",
+                    class: "app-menu-list-item-flow",
+                    focusable: true,
+                    default_select: 0
+                }, app_widget)
             ])
-        ]),
-        scroll(#{
-            orientation: "v",
-            class: "app-menu-content",
-            height: 300,
-            vscroll: true,
-            hscroll: false
-        }, [                    
-            flowbox(#{
-                onaccept: "notify-send {}",
-                selection_model: "single",
-                class: "app-menu-list-item-flow",
-                focusable: true,
-                default_select: 0
-            }, app_widget)
         ])
     ])
 }
