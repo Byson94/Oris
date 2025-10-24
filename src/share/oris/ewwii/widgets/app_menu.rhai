@@ -43,7 +43,7 @@ fn render_app_menu() {
                 hscroll: false
             }, [                    
                 flowbox(#{
-                    onaccept: "notify-send {}",
+                    onaccept: "notify-send '{}'",
                     selection_model: "single",
                     class: "app-menu-list-item-flow",
                     focusable: true,
