@@ -18,13 +18,22 @@ pub fn app_list() -> Array {
             for entry in entries.flatten() {
                 let path = entry.path();
                 if path.extension().and_then(OsStr::to_str) == Some("desktop") {
-                    if let Some(name) = path.file_stem().and_then(OsStr::to_str) {
-                        result.push(Dynamic::from(name.to_string()));
+                    if let Ok(contents) = fs::read_to_string(&path) {
+                        for line in contents.lines() {
+                            let line = line.trim();
+                            if line.starts_with("Name=") {
+                                if let Some(name) = line.strip_prefix("Name=") {
+                                    result.push(Dynamic::from(name.to_string()));
+                                }
+                                break;
+                            }
+                        }
                     }
                 }
             }
         }
     }
+
     result
 }
 
