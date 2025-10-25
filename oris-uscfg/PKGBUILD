@@ -4,7 +4,17 @@ pkgrel="1"
 pkgdesc="Custom configuration and looks for oris desktop environment"
 arch=("x86_64")
 license=("GPL3")
-depend=("niri" "brightnessctl")
+depend=(
+  # core
+  "niri"
+  "brightnessctl"
+
+  # Theme
+  "flat-remix-grey"
+  "glib2"
+  "dconf"
+  "papirus-icon-theme"
+)
 
 package() {
   mkdir -p ${pkgdir}/etc/skel/
