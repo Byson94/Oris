@@ -1,4 +1,4 @@
-#!/bin/bash
+# !/bin/bash
 set -euo pipefail
 
 dirs=("oris-ewwii-plugins" "oris-uscfg" ".")

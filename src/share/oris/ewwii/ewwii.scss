@@ -1,4 +1,4 @@
-$background-color: #181e2c;
+$background-color: #272a34;
 $background-color-light: #9197ae;
 $crimson: #f02d3a;
 $dark-calendar-text: #b0b4bc;
@@ -20,7 +20,7 @@ $dark-calendar-highlight: #d35d6e;
 .workspace {
   background: $background-color;
   border-radius: 10px;
-  padding: 10px;
+  padding: 6px 10px;
   border: 2px solid $background-color-light;
 }
 
@@ -31,7 +31,7 @@ $dark-calendar-highlight: #d35d6e;
 .sidebar-revealer {
   background: $background-color;
   border-radius: 10px;
-  padding: 10px;
+  padding: 6px 10px;
   padding-right: 14px;
   color: #ffffff;
   border: 2px solid $background-color-light;
@@ -44,22 +44,15 @@ $dark-calendar-highlight: #d35d6e;
 // == Center == //
 .search-btn {
   background-color: $background-color;
-  padding: 10px 25px; // 10 height, 25 width
-  border-radius: 50px;
+  padding: 10px 20px; // 10 height, 25 width
+  border-radius: 20px;
   border: 2px solid $background-color-light;
 }
 
 // == Right side == //
-.wifi-wdgt {
-  background-color: $background-color;
-  padding: 10px;
-  border-radius: 10px;
-  border: 2px solid $background-color-light;
-}
-
 .time-wdgt {
   background-color: $background-color;
-  padding: 10px;
+  padding: 6px 10px;
   border-radius: 10px;
   border: 2px solid $background-color-light;
 }
@@ -67,7 +60,7 @@ $dark-calendar-highlight: #d35d6e;
 .power-wdgt {
   background-color: $background-color;
   color: $crimson;
-  padding: 10px;
+  padding: 6px 10px;
   padding-right: 12px;
   border-radius: 10px;
   border: 2px solid $background-color-light;
@@ -93,7 +86,7 @@ $dark-calendar-highlight: #d35d6e;
 .power-menu button {
   background: $background-color;
   color: white;
-  padding: 8px;
+  padding: 6px;
   font-size: 15px;
   border-radius: 10px;
   margin-bottom: 5px;
@@ -129,6 +122,10 @@ $dark-calendar-highlight: #d35d6e;
   animation: SlideInBottom 0.2s ease-out forwards;
 }
 
+.sidebar-content-box button {
+  padding: 6px;
+}
+
 .sidebar-content-box .cal-box {
   color: white;
   padding: 8px;
@@ -162,7 +159,7 @@ $dark-calendar-highlight: #d35d6e;
   background-color: #4e4e4e;
   border-radius: 50px;
   min-height: 10px;
-  min-width: 80px;
+  min-width: 90px;
   margin: 5px;
 }
 
@@ -225,10 +222,14 @@ calendar:indeterminate {
 // == Application menu == //
 .app-menu-searchbar, .app-menu-content {
   background: $background-color;
-  padding: 15px;
-  border-radius: 50px;
+  padding: 10px;
+  border-radius: 15px;
   border: 2px solid $background-color-light;
   animation: FadeIn 0.2s linear forwards;
+}
+
+.app-menu-searchbar entry selection {
+  background-color: lighten($background-color, 10%);
 }
 
 .app-menu-content {

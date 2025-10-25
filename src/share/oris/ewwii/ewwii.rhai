@@ -1,6 +1,6 @@
 import "std::env" as env;
-import "widgets/time" as _time;
 import "widgets/app_menu" as _app_menu;
+import "widgets/time" as _time;
 
 fn render(wsp_info, time) {
     return box(#{ orientation: "h", 

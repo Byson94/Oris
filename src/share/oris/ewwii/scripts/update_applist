@@ -1,0 +1,7 @@
+#!/bin/bash
+
+if [[ -n "$1" ]]; then
+  ewwii update -i new_app_list=$1 -p -l application_menu -c .
+else
+  exit 1
+fi

@@ -1,12 +1,11 @@
 import "api::slib" as slib;
+import "std::command" as cmd;
 
-fn render_app_menu() {
-    let init_app_list = slib::call_fn("app_list", []);
-
+fn render_app_menu(app_list) {
     let app_widget = [];
     let index = 0;
 
-    for app in init_app_list {
+    for app in app_list {
         app_widget.push(
             eventbox(#{ class: "app-menu-list-item", cursor: "pointer", widget_name: app }, [
                 label(#{ 
@@ -32,7 +31,9 @@ fn render_app_menu() {
             }, [
                 box(#{ orientation: "h", space_evenly: false }, [
                     label(#{ text: "Search: " }),
-                    input(#{ onchange: "" })
+                    input(#{ 
+                        onchange: "scripts/update_applist {}" 
+                    })
                 ])
             ]),
             scroll(#{
@@ -44,7 +45,7 @@ fn render_app_menu() {
             }, [                    
                 flowbox(#{
                     onaccept: "notify-send '{}'",
-                    selection_model: "single",
+                    selection_model: "browse",
                     class: "app-menu-list-item-flow",
                     focusable: true,
                     default_select: 0
@@ -52,6 +53,18 @@ fn render_app_menu() {
             ])
         ])
     ])
+}
+
+let app_list;
+
+if is_def_var("new_app_list") {
+    if new_app_list == "" {
+        app_list = slib::call_fn("app_list", []);
+    } else {
+        app_list = slib::call_fn("fuzzy_search", [new_app_list]);
+    }
+} else {
+    app_list = slib::call_fn("app_list", []);
 }
 
 enter([
@@ -62,5 +75,5 @@ enter([
             height: "60px"
         },
         focusable: "exclusive",
-    }, render_app_menu()),
+    }, render_app_menu(app_list)),
 ])
