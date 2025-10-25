@@ -2,10 +2,10 @@
 padding.x = 10
 padding.y = 10
 startup_mode = "Maximized"
-opacity = 0.9
+opacity = 0.96
 
 [colors.primary]
-background = "#181e2c"
+background = "#272a34"
 foreground = "#D8DADC"
 
 [font]
