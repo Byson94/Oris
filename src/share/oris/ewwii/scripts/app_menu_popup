@@ -1,19 +1,9 @@
 #!/bin/bash
 
-STATEFILE="$XDG_RUNTIME_DIR/ewwii_appmenu_popup_state"
-
-if [[ -f $STATEFILE ]]; then
-  last_state=$(cat $STATEFILE)
+if pgrep -x "fuzzel" > /dev/null; then
+    pkill -x "fuzzel"
 else
-  last_state="closed"
+    fuzzel --anchor top &
 fi
 
-if [[ $last_state == "open" ]]; then
-  ewwii close application_menu --config .
-  echo "closed" >$STATEFILE
-else
-  ewwii open application_menu --screen 0 --config .
-  echo "open" >$STATEFILE
-fi
-sleep 0.2
-
+sleep 2
