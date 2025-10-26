@@ -9,6 +9,9 @@ depend=(
   "niri"
   "brightnessctl"
 
+  # Utils
+  "fuzzel"
+
   # Theme
   "flat-remix-grey"
   "glib2"
