@@ -17,7 +17,6 @@ ewwii open time -c "$CFG"
 
 # start osd service
 old_state=""
-CFG=$1
 close_pid=""
 
 render_osd() {
