@@ -16,25 +16,25 @@ ewwii open bar -c "$CFG"
 ewwii open time -c "$CFG"
 
 # start osd service
-old_state=""
+old_state=$(pamixer --get-volume)
 close_pid=""
 
 render_osd() {
     local vol=$1
     local widget=$2
 
-    if ! ewwii active-windows -c "$CFG" | grep -q '^$widget:'; then
+    if ! ewwii active-windows -c "$CFG" | grep -q "^$widget:"; then
         ewwii open "$widget" -c "$CFG"
     fi
 
-    ewwii update --inject "injected_volume=$vol" -c "$CFG"
+    ewwii update --inject "injected_volume=$vol" -pc "$CFG"
 
     if [ -n "$close_pid" ] && kill -0 "$close_pid" 2>/dev/null; then
         kill "$close_pid" 2>/dev/null
     fi
 
     (
-        sleep 1
+        sleep 2
         ewwii close "$widget" -c "$CFG"
     ) &
     close_pid=$!
