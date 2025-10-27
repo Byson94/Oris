@@ -1,7 +1,7 @@
 # !/bin/bash
 set -euo pipefail
 
-dirs=("oris-ewwii-plugins" "oris-uscfg" ".")
+dirs=("oris-ewwii-plugins" "oris-uscfg" "oris-misc-pkgs" ".")
 
 for dir in "${dirs[@]}"; do
     echo "=============================="

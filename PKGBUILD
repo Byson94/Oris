@@ -15,6 +15,10 @@ depends=(
   "hyprlock"
 )
 
+optdepends=(
+  "oris-misc-pkgs: Miscellaneous packages providing various applications for general use"
+)
+
 package() {
   mkdir -p "${pkgdir}/usr/"
 

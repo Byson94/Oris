@@ -6,8 +6,14 @@ A desktop environment made for AxOS.
 
 It is still under development and it is not expected to work properly under any means.
 
-- [x] Niri Confs
+- [x] Oris user confs
 - [x] Bar
-- [x] Terminal
-- [ ] Shell
-- [x] Animations
+- [x] Sidebar
+- [x] Calendar
+- [x] App menu
+- [x] Power menu
+- [x] Widget animations
+- [x] OSD
+- [x] Lockscreen (needs improvement tho)
+- [ ] Dashboard
+- [ ] Wallpaper menu

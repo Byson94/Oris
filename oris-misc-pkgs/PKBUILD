@@ -1,0 +1,12 @@
+pkgname="oris-misc-pkgs"
+pkgver="0.1"
+pkgrel="1"
+pkgdesc="Miscellaneous packages for oris desktop environement"
+arch=("x86_64")
+depend=(
+  "thunar"
+  "alacritty"
+  "mousepad"
+  "mpd"
+  "fastfetch"
+)
