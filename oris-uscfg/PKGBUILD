@@ -11,12 +11,14 @@ depend=(
 
   # Utils
   "fuzzel"
+  "dunst"
 
   # Theme
-  "flat-remix-grey"
+  "adw-gtk-theme"
   "glib2"
   "dconf"
   "papirus-icon-theme"
+  "matugen"
 )
 
 package() {

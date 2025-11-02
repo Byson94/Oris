@@ -11,6 +11,11 @@ if [[ ! -f "$PLUGIN" ]]; then
   exit 1
 fi
 
+# Setup theme
+if [ ! -e "$HOME/.local/share/ewwii/colors.scss" ]; then
+    cat "$CFG/ewwii_backup_theme.scss" > "$HOME/.local/share/ewwii/colors.scss"
+fi
+
 ewwii daemon -c "$CFG" --with-plugin "$PLUGIN" &
 ewwii open bar -c "$CFG"
 ewwii open time -c "$CFG"

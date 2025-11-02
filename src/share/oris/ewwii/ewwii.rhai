@@ -3,7 +3,7 @@ import "std::env" as env;
 import "widgets/time" as _time;
 import "widgets/volosd" as _volosd;
 
-fn render(wsp_info, time) {
+fn render(wsp_info) {
     return box(#{ orientation: "h", 
     }, [
         box(#{
@@ -12,7 +12,7 @@ fn render(wsp_info, time) {
             box(#{}, [
                 left(wsp_info),
                 center(),
-                right(time),
+                right(),
             ])
         ])
     ])
@@ -76,14 +76,24 @@ fn center() {
     ])
 }
 
-fn right(time) {
+fn right() {
+    let time = localsignal(#{ 
+        type: "poll", 
+        initial: "", 
+        cmd: `v=$(date +%H:%M); echo "  $v"`, 
+        interval: "1s" 
+    });
     return box(#{ 
         orientation: "h", 
         space_evenly: false, 
         halign: "end",
         spacing: 10,
     }, [
-        label(#{ text: `   ${time}`, class: "time-wdgt" }),
+        localbind(#{
+            label: time
+        }, [
+            label(#{ text: "", class: "time-wdgt" }),
+        ]),
         button(#{ label: "", class: "power-wdgt", onclick: "scripts/power-menu-popup", timeout: "5s" })
     ])
 }
@@ -188,7 +198,6 @@ fn render_app_menu() {
 
 enter([
     listen("wsp_info", #{ initial: "{}", cmd: "scripts/workspace" }),
-    poll("time", #{ initial: "", cmd: "date +%H:%M", interval: "10s" }),
     poll("date", #{ initial: "", cmd: "date +%d/%m/%Y", interval: "24h" }),
     poll("uptime", #{ initial: "0", cmd: "cat /proc/uptime", interval: "2m" }),
     listen("volume", #{ initial: "", cmd: "scripts/getvol" }),
@@ -201,15 +210,13 @@ enter([
         windowtype: "dock",
         exclusive: true,
         monitor: 0,
-    }, render(wsp_info, time)),
+    }, render(wsp_info)),
 
     defwindow("power-menu", #{
         geometry: #{
             y: "10px",
             x: "10px",
             anchor: "top right",
-            width: "80px",
-            height: "60px"
         },
         windowtype: "dialog",
         monitor: 0,
@@ -220,8 +227,6 @@ enter([
             y: "10px",
             x: "10px",
             anchor: "top left",
-            width: "80px",
-            height: "60px"
         },
         windowtype: "dialog",
         monitor: 0,
@@ -230,7 +235,7 @@ enter([
     defwindow("calendar_popup", #{
         geometry: #{
             x: "175px",
-            y: "15px",
+            y: "10px",
             anchor: "top left",
             width: "270px",
             height: "60px"

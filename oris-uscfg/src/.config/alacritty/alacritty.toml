@@ -1,17 +1,14 @@
+[general]
+import = ["colors.toml"]
+
 [window]
 padding.x = 10
 padding.y = 10
 startup_mode = "Maximized"
-opacity = 0.96
-
-[colors.primary]
-background = "#272a34"
-foreground = "#D8DADC"
+opacity = 0.98
 
 [font]
 normal.family = "FiraCode Nerd Font"
-# also good
-# normal.family = "Hack Nerd Font"
 normal.style = "Bold"
 size = 10.0
 

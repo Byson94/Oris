@@ -1,6 +1,17 @@
 fn render_time(time) {
-	label(#{ text: time.split()[0] /* removed space */ })
+	localbind(#{
+		label: time
+	}, [
+		label(#{ text: ""})
+	])
 }
+
+let time = localsignal(#{ 
+    type: "poll", 
+    initial: "", 
+    cmd: "date +%H:%M", 
+    interval: "1s" 
+});
 
 enter([
 	defwindow("time", #{

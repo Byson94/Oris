@@ -1,8 +1,4 @@
-$background-color: #272a34;
-$background-color-light: #9197ae;
-$crimson: #f02d3a;
-$dark-calendar-text: #b0b4bc;
-$dark-calendar-highlight: #d35d6e;
+@import "$HOME/.local/share/ewwii/colors";
 
 // remove all gtk theme css
 * {
@@ -12,29 +8,27 @@ $dark-calendar-highlight: #d35d6e;
 // == Top bar styles == //
 .top-bar {
   border-radius: 10px;
-  background: transparent;
-  padding: 5px;
+  background: $background-color;
+  margin: 5px;
 }
 
 // == Left side == //
 .workspace {
-  background: $background-color;
-  border-radius: 10px;
-  padding: 6px 10px;
-  border: 2px solid $background-color-light;
+  background: $background-color-secondary;
+  border-radius: 20px;
+  padding: 4px 10px;
 }
 
 .workspace button:hover {
-  color: $crimson;
+  color: $highlight;
 }
 
 .sidebar-revealer {
-  background: $background-color;
-  border-radius: 10px;
-  padding: 6px 10px;
-  padding-right: 14px;
+  background: $background-color-secondary;
+  border-radius: 20px;
+  padding: 4px 8px;
+  padding-right: 12px;
   color: #ffffff;
-  border: 2px solid $background-color-light;
 
   &:hover {
     color: darken(#ffffff, 15%);
@@ -43,31 +37,34 @@ $dark-calendar-highlight: #d35d6e;
 
 // == Center == //
 .search-btn {
-  background-color: $background-color;
-  padding: 10px 20px; // 10 height, 25 width
-  border-radius: 20px;
-  border: 2px solid $background-color-light;
+  $color-str: inspect($background-color-secondary);
+  $encoded-color: "%23#{str-slice($color-str, 2)}";
+
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 40'><polygon points='10,0 100,0 90,40 0,40' fill='#{$encoded-color}'/></svg>");
+  background-size: 100% 100%;
+  background-position: 0 0;
+  background-repeat: no-repeat;
+  padding: 6px 20px;
+  margin-right: 16px;
 }
 
 // == Right side == //
 .time-wdgt {
-  background-color: $background-color;
+  background: $background-color-secondary;
+  border-radius: 20px;
   padding: 6px 10px;
-  border-radius: 10px;
-  border: 2px solid $background-color-light;
 }
 
 .power-wdgt {
-  background-color: $background-color;
-  color: $crimson;
-  padding: 6px 10px;
-  padding-right: 12px;
-  border-radius: 10px;
-  border: 2px solid $background-color-light;
+  background: $background-color-secondary;
+  border-radius: 20px;
+  color: $highlight;
+  padding: 4px 8px;
+  padding-right: 10px;
   font-size: 15px;
 
   &:hover {
-    color: darken($crimson, 15%);
+    color: darken($highlight, 15%);
   }
 }
 
@@ -93,17 +90,17 @@ $dark-calendar-highlight: #d35d6e;
   border: 0.5px solid $background-color-light;
 
   &:hover {
-    color: $crimson;
-    border-color: $crimson;
+    color: $highlight;
+    border-color: $highlight;
   }
 }
 
 .power-menu .shutdown-btn {
-  color: $crimson;
-  border: 1px solid $crimson;
+  color: $highlight;
+  border: 1px solid $highlight;
 
   &:hover {
-    background: $crimson;
+    background: $highlight;
     color: black;
   }
 }
@@ -135,8 +132,8 @@ $dark-calendar-highlight: #d35d6e;
   border: 0.5px solid $background-color-light;
 
   &:hover {
-    color: $crimson;
-    border-color: $crimson;
+    color: $highlight;
+    border-color: $highlight;
   }
 }
 
@@ -150,7 +147,7 @@ $dark-calendar-highlight: #d35d6e;
 }
 
 .metric scale trough highlight {
-  background-color: $crimson;
+  background-color: $highlight;
   color: #000000;
   border-radius: 10px;
 }
@@ -169,8 +166,8 @@ $dark-calendar-highlight: #d35d6e;
   font-weight: bold;
   padding: 10px;
   border-radius: 15px;
-  background-color: rgba($background-color, 20%);
-  border: 2px solid rgba($background-color-light, 20%);
+  background-color: rgba($background-color, 15%);
+  border: 2px solid rgba($background-color-light, 15%);
   margin-bottom: 38px;
 }
 
