@@ -54,10 +54,11 @@ fn show_settings(page) {
             box(#{
                 class: "sidebar",
                 orientation: "v",
-                space_evenly: false
+                space_evenly: false,
             }, [
                 button(#{ label: "Color", onclick: "ewwii update -pi SHOW_SETTING_PAGE=0 -c ." }),
-                button(#{ label: "Wallpaper", onclick: "ewwii update -pi SHOW_SETTING_PAGE=1 -c ." })
+                button(#{ label: "Wallpaper", onclick: "ewwii update -pi SHOW_SETTING_PAGE=1 -c ." }),
+                button(#{ label: "Close", valign: "end", onclick: "ewwii close settings -c .", class: "close_btn"  })
             ]),
             stack(#{
                 selected: page,
@@ -68,7 +69,6 @@ fn show_settings(page) {
                 page_2(),
             ]),
         ]),
-		//button(#{ label: "Close", onclick: "ewwii close settings -c ." })
 	])
 }
 
