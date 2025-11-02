@@ -1,0 +1,50 @@
+.settings {
+	background: $background-color;
+	border-radius: 20px;
+	font-size: 15px;
+}
+
+.bold-label {
+	font-weight: bold;
+}
+
+.settings .sidebar {
+	background: darken($background-color, 2%);
+	padding: 10px;
+	border-radius: 20px;
+}
+
+.settings .sidebar button {
+	background: $background-color-secondary;
+	padding: 5px;
+	border-radius: 10px;
+	margin: 5px;
+}
+
+.settings .content_space {
+	padding: 20px;
+	padding-bottom: 100px;
+}
+
+.settings .page1 .preferred_color button {
+	background: $background-color-secondary;
+	margin: 5px;
+	border-radius: 5px;
+	padding: 5px;
+}
+
+.settings .page2 .current_wallpaper entry {
+	background: $background-color-light;
+	border-radius: 10px;
+	padding: 10px;
+}
+
+.settings .page2 .new_wallpaper button {
+	border-radius: 10px;
+	padding: 10px;
+}
+
+.settings .page2 .choose_wallpaper_btn {
+	background: $background-color-secondary;
+	border-radius: 20px;
+}

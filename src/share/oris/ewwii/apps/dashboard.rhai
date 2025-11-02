@@ -1,6 +1,6 @@
 fn show_dashboard() {
 	box(#{}, [
-		button(#{ label: "Close" })
+		button(#{ label: "Close", onclick: "ewwii close dashboard -c ." })
 	])
 }
 

@@ -1,0 +1,39 @@
+#!/bin/bash
+
+WALLPAPER=$(yad --file --title="Select Wallpaper" --width=800 --height=600)
+[ -z "$WALLPAPER" ] && exit 0 
+
+if [ ! -f "$WALLPAPER" ]; then
+    notify-send "Error" "File not found: $WALLPAPER"
+    exit 1
+fi
+
+MIME_TYPE=$(file --mime-type -b "$WALLPAPER")
+if [[ $MIME_TYPE != image/* ]]; then
+    notify-send "Invalid File" "Selected file is not an image."
+    exit 1
+fi
+
+matugen image "$WALLPAPER"
+if [ $? -ne 0 ]; then
+    notify-send "Error" "matugen failed to process the image."
+    exit 1
+fi
+
+sleep 1
+
+ewwii reload -c .
+if [ $? -ne 0 ]; then
+    notify-send "Warning" "ewwii reload failed."
+fi
+
+if pidof dunst >/dev/null; then
+    pkill dunst
+    sleep 0.5
+    dunst &
+else
+    dunst &
+    notify-send "Notice" "Dunst was not running. Started a new instance."
+fi
+
+notify-send "Wallpaper Applied" "Wallpaper successfully changed to $(basename "$WALLPAPER")"
