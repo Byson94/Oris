@@ -18,7 +18,7 @@ depend=(
   "glib2"
   "dconf"
   "papirus-icon-theme"
-  "matugen"
+  "matugen-bin"
 )
 
 package() {
