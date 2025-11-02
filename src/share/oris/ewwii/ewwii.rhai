@@ -133,11 +133,12 @@ fn draw_slider(icon, onchange, value) {
     ])
 }
 
-fn render_sidebar(volume, uptime, date) {
-    let uptime_seconds = parse_float(uptime.split(" ")[0]);
-    let total_seconds = to_int(uptime_seconds);
-    let uptime_hours = total_seconds / 3600;
-    let uptime_minutes = (total_seconds % 3600) / 60;
+fn render_sidebar(volume, date) {
+    let uptime = localsignal(#{
+        type: "poll",
+        cmd: `awk '{printf "Uptime: %dh %dm\n", $1/3600, ($1%3600)/60}' /proc/uptime`,
+        interval: "2m",
+    });
 
     return box(#{
         orientation: "v",
@@ -155,11 +156,15 @@ fn render_sidebar(volume, uptime, date) {
             orientation: "v",
             class: "sidebar-text-box"
         }, [
-            label(#{ 
-                text: `Uptime: ${uptime_hours}h ${uptime_minutes}m`, 
-                class: "sidebar-uptime",
-                halign: "start"
-            }),
+            localbind(#{
+                label: uptime
+            }, [
+                label(#{ 
+                    text: "", 
+                    class: "sidebar-uptime",
+                    halign: "start"
+                }),
+            ]),
             label(#{ 
                 text: `Date: ${date}`, 
                 class: "sidebar-date",
@@ -202,7 +207,6 @@ fn render_app_menu() {
 enter([
     listen("wsp_info", #{ initial: "{}", cmd: "scripts/workspace" }),
     poll("date", #{ initial: "", cmd: "date +%d/%m/%Y", interval: "24h" }),
-    poll("uptime", #{ initial: "0", cmd: "cat /proc/uptime", interval: "2m" }),
     listen("volume", #{ initial: "", cmd: "scripts/getvol" }),
     poll("day", #{ interval: "20h", cmd: "date '+%d'" }),
     poll("year", #{ interval: "20h", cmd: "date '+%Y'" }),
@@ -233,7 +237,7 @@ enter([
         },
         windowtype: "dialog",
         monitor: 0,
-    }, render_sidebar(volume, uptime, date)),
+    }, render_sidebar(volume, date)),
 
     defwindow("calendar_popup", #{
         geometry: #{
