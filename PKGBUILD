@@ -9,6 +9,9 @@ depends=(
   "oris-uscfg"
   "oris-ewwii-plugins"
 
+  # Utils
+  "yad"
+
   # User Interface
   "ewwii"
   "swww"
