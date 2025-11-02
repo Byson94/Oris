@@ -4,7 +4,8 @@ import "widgets/time" as _time;
 import "widgets/volosd" as _volosd;
 
 fn render(wsp_info) {
-    return box(#{ orientation: "h", 
+    return box(#{ 
+        orientation: "h", 
     }, [
         box(#{
             class: "top-bar",
