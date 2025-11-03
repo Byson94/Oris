@@ -7,6 +7,7 @@ fn page_1() {
         spacing: 10,
         space_evenly: false
     }, [
+        label(#{ text: "Color Settings", halign: "start", class: "bold-label-heading" }),
         box(#{ orientation: "v", class: "preferred_color" }, [
             label(#{ text: "Preferred Color", halign: "start", class: "bold-label" }),
             box(#{}, [
@@ -24,6 +25,7 @@ fn page_2() {
         spacing: 10,
         space_evenly: false
     }, [
+        label(#{ text: "Wallpaper Settings", halign: "start", class: "bold-label-heading" }),
         box(#{ orientation: "v", class: "current_wallpaper" }, [
             label(#{ text: "Selected Wallpaper", halign: "start", class: "bold-label" }),
             input(#{ 

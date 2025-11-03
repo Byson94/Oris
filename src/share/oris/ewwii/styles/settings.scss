@@ -2,10 +2,18 @@
 	background: $background-color;
 	border-radius: 20px;
 	font-size: 15px;
+	border: 2px solid $background-color-light;
 }
 
 .bold-label {
 	font-weight: bold;
+}
+
+.bold-label-heading {
+	font-weight: bold;
+	color: #82aaf9;
+	font-size: 18px;
+	text-decoration: underline;
 }
 
 .settings .sidebar {
