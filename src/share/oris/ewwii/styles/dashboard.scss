@@ -1,0 +1,42 @@
+.dashboard {
+	background: $background-color;
+	border-radius: 20px;
+	font-size: 15px;
+	border: 2px solid $background-color-light;
+	padding: 10px;
+}
+
+.small-font {
+	font-size: 12px;
+}
+
+.dashboard .close-btn {
+	padding: 2px;
+	border-radius: 5px;
+}
+
+.dashboard .header {
+	background-color: mix($background-color-secondary, green);
+	border-radius: 10px;
+	padding: 5px;
+	margin: 5px;
+}
+
+.dashboard .welcome_user {
+	background-color: mix($background-color-secondary, green);
+	padding: 5px;
+	border-radius: 10px;
+	margin: 5px;
+}
+
+.dashboard .dashboard_time, .dashboard .sys_info, .dashboard .notification_tray,
+.dashboard .weather {
+	background-color: $background-color-secondary;
+	padding: 5px;
+	margin: 5px;
+	border-radius: 10px;
+}
+
+.dashboard .weather {
+	padding: 150px;
+}

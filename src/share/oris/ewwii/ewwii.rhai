@@ -3,7 +3,7 @@ import "std::env" as env;
 import "widgets/time" as _time;
 import "widgets/volosd" as _volosd;
 import "apps/settings" as _settings;
-// import "apps/dashboard" as _dashboard;
+import "apps/dashboard" as _dashboard;
 
 fn render(wsp_info) {
     return box(#{ 
