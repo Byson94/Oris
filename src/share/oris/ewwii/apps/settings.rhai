@@ -86,8 +86,8 @@ enter([
             x: "175px",
             y: "15px",
             anchor: "center",
-            width: "800px",
-            height: "600px"
+            width: "80%",
+            height: "80%"
         },
         windowtype: "dialog",
 	}, show_settings(page))
