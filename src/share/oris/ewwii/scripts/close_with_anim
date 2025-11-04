@@ -1,0 +1,14 @@
+#!/bin/bash
+
+WINDOW="$1"
+ANIM="$2"
+DUR="$3"
+
+# play anim
+ewwii update -pi EXTRA_CLASS="$ANIM" -l "$WINDOW" -c . 
+
+# wait for anim
+sleep "$DUR"
+
+# close after anim
+ewwii close "$WINDOW" -c .

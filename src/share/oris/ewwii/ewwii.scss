@@ -262,6 +262,10 @@ flowboxchild:selected > .app-menu-list-item {
 }
 
 // == Animations == //
+.do-fade-out {
+  animation: FadeOut 0.2s linear forwards;
+}
+
 @keyframes SlideInBottom {
   0% {
     transform: translateY(-200px);
@@ -286,5 +290,14 @@ flowboxchild:selected > .app-menu-list-item {
   }
   100% {
     opacity: 1;
+  }
+}
+
+@keyframes FadeOut {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
   }
 }

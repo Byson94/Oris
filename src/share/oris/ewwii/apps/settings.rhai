@@ -45,9 +45,10 @@ fn page_2() {
     ])
 }
 
-fn show_settings(page) {
+fn show_settings(page, anim_class) {
 	box(#{
         orientation: "v",
+        class: `settings ${anim_class}`
     }, [
         box(#{
             orientation: "h",
@@ -60,7 +61,13 @@ fn show_settings(page) {
             }, [
                 button(#{ label: "Color", onclick: "ewwii update -pi SHOW_SETTING_PAGE=0 -c ." }),
                 button(#{ label: "Wallpaper", onclick: "ewwii update -pi SHOW_SETTING_PAGE=1 -c ." }),
-                button(#{ label: "Close", valign: "end", onclick: "ewwii close settings -c .", class: "close_btn"  })
+                button(#{ 
+                    label: "Close", 
+                    valign: "end", 
+                    onclick: "scripts/close_with_anim settings do-fade-out 0.2", 
+                    timeout: "5s",
+                    class: "close_btn"  
+                })
             ]),
             stack(#{
                 selected: page,
@@ -80,6 +87,12 @@ let page = if is_def_var("SHOW_SETTING_PAGE") {
     0
 };
 
+let anim_class = if is_def_var("EXTRA_CLASS") {
+    EXTRA_CLASS
+} else {
+    ""
+};
+
 enter([
 	defwindow("settings", #{
         geometry: #{
@@ -90,5 +103,5 @@ enter([
             height: "80%"
         },
         windowtype: "dialog",
-	}, show_settings(page))
+	}, show_settings(page, anim_class))
 ])

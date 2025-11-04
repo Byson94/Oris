@@ -4,7 +4,7 @@ fn get_notifications() {
     return label(#{ text: "None Yet", style: "font-style: italic;" })
 }
 
-fn show_dashboard(cpu, mem) {
+fn show_dashboard(cpu, mem, extra_classes) {
     let time = localsignal(#{ 
         type: "poll", 
         initial: "", 
@@ -28,6 +28,7 @@ fn show_dashboard(cpu, mem) {
 	box(#{
         orientation: "v",
         space_evenly: false,
+        class: `dashboard ${extra_classes}`
     }, [
         box(#{ class: "header" }, [
             localbind(#{
@@ -39,7 +40,8 @@ fn show_dashboard(cpu, mem) {
                 label: "Close", 
                 halign: "end", 
                 class: "close-btn small-font", 
-                onclick: "ewwii close dashboard -c ." 
+                onclick: "scripts/close_with_anim dashboard do-fade-out 0.2" ,
+                timeout: "5s"
             })
         ]),
 
@@ -83,6 +85,12 @@ fn show_dashboard(cpu, mem) {
 	])
 }
 
+let extra_classes = if is_def_var("EXTRA_CLASS") {
+    EXTRA_CLASS
+} else {
+    ""
+};
+
 enter([
     poll("cpu_usage", #{ 
         cmd: `top -bn1 | grep "Cpu(s)" | awk '{print 100 - $8}' | cut -d. -f1`, 
@@ -101,5 +109,5 @@ enter([
             height: "80%"
         },
         windowtype: "dialog",
-	}, show_dashboard(cpu_usage, mem_usage))
+	}, show_dashboard(cpu_usage, mem_usage, extra_classes))
 ])
