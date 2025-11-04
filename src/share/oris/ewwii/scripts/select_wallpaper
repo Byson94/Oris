@@ -1,7 +1,9 @@
 #!/bin/bash
 
+ewwii close settings -c .
 WALLPAPER=$(yad --file --title="Select Wallpaper" --width=800 --height=600)
 [ -z "$WALLPAPER" ] && exit 0 
+ewwii open settings -c .
 
 if [ ! -f "$WALLPAPER" ]; then
     notify-send "Error" "File not found: $WALLPAPER"
