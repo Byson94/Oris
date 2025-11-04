@@ -11,6 +11,7 @@ depends=(
 
   # Utils
   "yad"
+  "dash"
 
   # User Interface
   "ewwii"
