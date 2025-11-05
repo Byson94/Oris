@@ -32,6 +32,13 @@ case "$1" in
 
   systemctl --user import-environment XDG_CURRENT_DESKTOP DESKTOP_SESSION
 
+  for dir in /etc/skel/.config/*; do
+    name=$(basename "$dir")
+    if [ ! -e "$HOME/.config/$name" ]; then
+      cp -r "$dir" "$HOME/.config/"
+    fi
+  done
+
   niri
   ;;
 *)
