@@ -4,12 +4,12 @@ fn get_notifications() {
     return label(#{ text: "None Yet", style: "font-style: italic;" })
 }
 
-fn show_dashboard(cpu, mem, extra_classes) {
+fn show_dashboard(extra_classes) {
     let time = localsignal(#{ 
         type: "poll", 
         initial: "", 
-        cmd: "date +%H:%M", 
-        interval: "1s" 
+        cmd: "date '+%H:%M'", 
+        interval: "1m" 
     });
 
     let uptime = localsignal(#{
@@ -19,11 +19,6 @@ fn show_dashboard(cpu, mem, extra_classes) {
     });
 
     let username = env::get_username();
-
-    let user_spaces = "";
-    for x in 0..(username.len() / 2) {
-        user_spaces += " ";
-    }
 
 	box(#{
         orientation: "v",
@@ -48,32 +43,36 @@ fn show_dashboard(cpu, mem, extra_classes) {
         box(#{ orientation: "h", space_evenly: false, vexpand: true, hexpand: true }, [
             box(#{ orientation: "v", space_evenly: false, vexpand: true, hexpand: true }, [
                 box(#{ orientation: "h", space_evenly: false, vexpand: true, hexpand: true }, [
-                    box(#{ class: "welcome_user" }, [
-                        label(#{ text: `${user_spaces}Hello \n${username}!` })
+                    box(#{ class: "welcome_user", hexpand: true }, [
+                        label(#{ text: `Hello, ${username}!` })
                     ]),
-                    box(#{ class: "dashboard_time" }, [
-                        localbind(#{
-                            label: time
-                        }, [
-                            label(#{ text: "Current Time" })
+                    box(#{ class: "dashboard_time", hexpand: true }, [
+                        box(#{ halign: "center" }, [
+                            localbind(#{
+                                label: time
+                            }, [
+                                label(#{ text: "Current Time" })
+                            ])
                         ])
                     ]),
-                    box(#{ class: "sys_info", orientation: "h", spacing: 6 }, [
-                        overlay(#{}, [
-                            circular_progress(#{ value: cpu, fg_color: "green" }),
-                            label(#{ 
-                                text: " ", 
-                                style: "margin: 2px 0px 0px 3px; font-size: 10px;" 
-                            }),
+                ]),
+                box(#{ 
+                    orientaiton: "h", 
+                    space_evenly: false, 
+                    vexpand: true, 
+                    hexpand: true,
+                }, [
+                    box(#{ orientation: "v" }, [
+                        box(#{ class: "music_dashb" }, [
+                            label(#{ text: "music here" })
                         ]),
-                        overlay(#{}, [
-                            circular_progress(#{ value: mem, fg_color: "green" }),
-                            label(#{ text: "", style: "margin-top: 2px; font-size: 10px;" }),
+                        box(#{ class: "weather" }, [
+                            label(#{ text: "Weather here" })
                         ]),
                     ]),
-                ]),
-                box(#{ orientaiton: "h", space_evenly: false, class: "weather", vexpand: true, hexpand: true }, [
-                    label(#{ text: "Weather here" })
+                    box(#{ class: "todo", hexpand: true }, [
+                        label(#{ text: "TODO" })
+                    ])
                 ]),
             ]),
 
@@ -92,14 +91,6 @@ let extra_classes = if is_def_var("EXTRA_CLASS") {
 };
 
 enter([
-    poll("cpu_usage", #{ 
-        cmd: `top -bn1 | grep "Cpu(s)" | awk '{print 100 - $8}' | cut -d. -f1`, 
-        interval: "5s",
-    }),
-    poll("mem_usage", #{ 
-        cmd: `free | awk '/Mem:/ {print int($3/$2 * 100)}'`, 
-        interval: "5s",
-    }),
 	defwindow("dashboard", #{
         geometry: #{
             x: "175px",
@@ -109,5 +100,5 @@ enter([
             height: "80%"
         },
         windowtype: "dialog",
-	}, show_dashboard(cpu_usage, mem_usage, extra_classes))
+	}, show_dashboard(extra_classes))
 ])

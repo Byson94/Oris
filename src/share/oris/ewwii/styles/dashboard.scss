@@ -24,13 +24,17 @@
 
 .dashboard .welcome_user {
 	background-color: mix($background-color-secondary, green);
-	padding: 5px;
 	border-radius: 10px;
 	margin: 5px;
+	font-size: 1.5em;
 }
 
-.dashboard .dashboard_time, .dashboard .sys_info, .dashboard .notification_tray,
-.dashboard .weather {
+.dashboard .dashboard_time {
+	font-size: 2em;
+}
+
+.dashboard .dashboard_time, .dashboard .music_dashb, .dashboard .notification_tray,
+.dashboard .weather, .dashboard .todo {
 	background-color: $background-color-secondary;
 	padding: 5px;
 	margin: 5px;
@@ -38,5 +42,5 @@
 }
 
 .dashboard .weather {
-	padding: 150px;
+	padding: 60px;
 }

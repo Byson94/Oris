@@ -9,8 +9,8 @@ fn render_time(time) {
 let time = localsignal(#{ 
     type: "poll", 
     initial: "", 
-    cmd: "date +%H:%M", 
-    interval: "1s" 
+    cmd: "date '+%H:%M'", 
+    interval: "1m" 
 });
 
 enter([

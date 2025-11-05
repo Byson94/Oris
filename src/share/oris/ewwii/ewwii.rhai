@@ -84,7 +84,7 @@ fn right() {
         type: "poll", 
         initial: "", 
         cmd: `v=$(date +%H:%M); echo "  $v"`, 
-        interval: "1s" 
+        interval: "1m" 
     });
     return box(#{ 
         orientation: "h", 
