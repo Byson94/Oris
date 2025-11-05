@@ -64,7 +64,7 @@ fn show_settings(page, anim_class) {
                 button(#{ 
                     label: "Close", 
                     valign: "end", 
-                    onclick: "scripts/close_with_anim settings do-fade-out 0.2", 
+                    onclick: "scripts/close_with_anim settings do-fade-out 0.1", 
                     timeout: "5s",
                     class: "close_btn"  
                 })

@@ -40,7 +40,7 @@ fn show_dashboard(cpu, mem, extra_classes) {
                 label: "Close", 
                 halign: "end", 
                 class: "close-btn small-font", 
-                onclick: "scripts/close_with_anim dashboard do-fade-out 0.2" ,
+                onclick: "scripts/close_with_anim dashboard do-fade-out 0.1" ,
                 timeout: "5s"
             })
         ]),
