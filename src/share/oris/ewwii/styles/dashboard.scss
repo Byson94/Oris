@@ -4,6 +4,16 @@
 	font-size: 15px;
 	border: 2px solid $background-color-light;
 	padding: 10px;
+	animation: SlideInTop 0.4s ease-out forwards;
+}
+
+@keyframes SlideInTop {
+  0% {
+    transform: translateY(1000px);
+  }
+  100% {
+    transform: translateY(0);
+  }
 }
 
 .small-font {

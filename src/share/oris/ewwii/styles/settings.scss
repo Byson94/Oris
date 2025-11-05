@@ -3,6 +3,16 @@
 	border-radius: 20px;
 	font-size: 15px;
 	border: 2px solid $background-color-light;
+	animation: SlideInLeft 0.2s ease-out forwards;
+}
+
+@keyframes SlideInLeft {
+  0% {
+    transform: translateX(1000px);
+  }
+  100% {
+    transform: translateX(0);
+  }
 }
 
 .bold-label {
