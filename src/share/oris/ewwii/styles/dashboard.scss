@@ -18,14 +18,14 @@
 }
 
 .dashboard .header {
-	background-color: mix($background-color-secondary, green);
+	background-color: lighten($background-color-secondary, 5%);
 	border-radius: 10px;
 	padding: 5px;
 	margin: 5px;
 }
 
 .dashboard .welcome_user {
-	background-color: mix($background-color-secondary, green);
+	background-color: lighten($background-color-secondary, 5%);
 	border-radius: 10px;
 	margin: 5px;
 	font-size: 1.5em;
@@ -37,7 +37,7 @@
 
 .dashboard .dashboard_time, .dashboard .music_dashb, .dashboard .notification_tray,
 .dashboard .weather, .dashboard .todo {
-	background-color: $background-color-secondary;
+	background-color: lighten($background-color, 5%);
 	padding: 5px;
 	margin: 5px;
 	border-radius: 10px;
