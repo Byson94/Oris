@@ -23,7 +23,7 @@ fn show_dashboard(extra_classes) {
 	box(#{
         orientation: "v",
         space_evenly: false,
-        class: `dashboard do-fade-in ${extra_classes}`
+        class: `dashboard ${extra_classes}`
     }, [
         box(#{ class: "header" }, [
             localbind(#{
