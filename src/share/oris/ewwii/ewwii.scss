@@ -178,7 +178,7 @@
   color: $dark-calendar-text;
   background-color: $background-color;
   border-radius: 10px;
-  animation: SlideInLeft 0.2s ease-out forwards;
+  animation: SlideInRight 0.2s ease-out forwards;
 }
 
 .calendar-in {
@@ -266,6 +266,14 @@ flowboxchild:selected > .app-menu-list-item {
   animation: FadeOut 0.1s linear forwards;
 }
 
+.do-slide-out-up {
+  animation: SlideOutTop 0.2s linear forwards;
+}
+
+.do-slide-out-left {
+  animation: SlideOutLeft 0.2s linear forwards;
+}
+
 @keyframes SlideInBottom {
   0% {
     transform: translateY(-200px);
@@ -275,12 +283,40 @@ flowboxchild:selected > .app-menu-list-item {
   }
 }
 
-@keyframes SlideInLeft {
+@keyframes SlideOutTop {
+  0% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  70% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-200px);
+  }
+}
+
+@keyframes SlideInRight {
   0% {
     transform: translateX(-200px);
   }
   100% {
     transform: translateX(0);
+  }
+}
+
+@keyframes SlideOutLeft {
+  0% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  70% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(-200px);
   }
 }
 
