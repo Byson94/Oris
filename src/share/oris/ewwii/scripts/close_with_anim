@@ -3,9 +3,10 @@
 WINDOW="$1"
 ANIM="$2"
 DUR="$3"
+CLASS="$4"
 
 # play anim
-ewwii update -pi EXTRA_CLASS="$ANIM" -l "$WINDOW" -c . 
+ewwii update -pi "$CLASS"="$ANIM" -l "$WINDOW" -c . 
 
 # wait for anim
 sleep "$DUR"

@@ -64,7 +64,7 @@ fn show_settings(page, anim_class) {
                 button(#{ 
                     label: "Close", 
                     valign: "end", 
-                    onclick: "scripts/close_with_anim settings do-fade-out 0.1", 
+                    onclick: "scripts/close_with_anim settings do-fade-out 0.1 SETTINGS_ANIM_CLASS", 
                     timeout: "5s",
                     class: "close_btn"  
                 })
@@ -87,8 +87,8 @@ let page = if is_def_var("SHOW_SETTING_PAGE") {
     0
 };
 
-let anim_class = if is_def_var("EXTRA_CLASS") {
-    EXTRA_CLASS
+let anim_class = if is_def_var("SETTINGS_ANIM_CLASS") {
+    SETTINGS_ANIM_CLASS
 } else {
     ""
 };

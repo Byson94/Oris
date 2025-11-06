@@ -35,7 +35,7 @@ fn show_dashboard(extra_classes) {
                 label: "Close", 
                 halign: "end", 
                 class: "close-btn small-font", 
-                onclick: "scripts/close_with_anim dashboard do-fade-out 0.1" ,
+                onclick: "scripts/close_with_anim dashboard do-fade-out 0.1 SETTINGS_ANIM_CLASS" ,
                 timeout: "5s"
             })
         ]),
@@ -84,8 +84,8 @@ fn show_dashboard(extra_classes) {
 	])
 }
 
-let extra_classes = if is_def_var("EXTRA_CLASS") {
-    EXTRA_CLASS
+let extra_classes = if is_def_var("DASHB_ANIM_CLASS") {
+    DASHB_ANIM_CLASS
 } else {
     ""
 };
