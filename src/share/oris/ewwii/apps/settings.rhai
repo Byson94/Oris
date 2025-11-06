@@ -48,7 +48,7 @@ fn page_2() {
 fn show_settings(page, anim_class) {
 	box(#{
         orientation: "v",
-        class: `settings ${anim_class}`
+        class: `settings do-fade-in ${anim_class}`
     }, [
         box(#{
             orientation: "h",

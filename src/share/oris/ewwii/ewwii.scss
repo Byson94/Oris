@@ -266,6 +266,10 @@ flowboxchild:selected > .app-menu-list-item {
   animation: FadeOut 0.1s linear forwards;
 }
 
+.do-fade-in {
+  animation: FadeIn 0.1s linear forwards;
+}
+
 @keyframes SlideInBottom {
   0% {
     transform: translateY(-200px);
