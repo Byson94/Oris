@@ -35,7 +35,7 @@ fn show_dashboard(extra_classes) {
                 label: "Close", 
                 halign: "end", 
                 class: "close-btn small-font", 
-                onclick: "scripts/close_with_anim dashboard do-fade-out 0.1 SETTINGS_ANIM_CLASS" ,
+                onclick: "scripts/close_with_anim dashboard do-fade-out 0.1 DASHB_ANIM_CLASS" ,
                 timeout: "5s"
             })
         ]),
