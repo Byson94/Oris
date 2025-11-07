@@ -1,4 +1,5 @@
 import "std::env" as env;
+import "std::command" as cmd;
 
 fn get_notifications() {
     return label(#{ text: "None Yet", style: "font-style: italic;" })
@@ -62,13 +63,8 @@ fn show_dashboard(extra_classes) {
                     vexpand: true, 
                     hexpand: true,
                 }, [
-                    box(#{ orientation: "v" }, [
-                        box(#{ class: "music_dashb" }, [
-                            label(#{ text: "music here" })
-                        ]),
-                        box(#{ class: "weather" }, [
-                            label(#{ text: "Weather here" })
-                        ]),
+                    box(#{ class: "music_dashb" }, [
+                        gtk_ui("./apps/test.ui", "my_button"),
                     ]),
                     box(#{ class: "todo", hexpand: true }, [
                         label(#{ text: "TODO" })

@@ -1,0 +1,5 @@
+<interface>
+  <object class="GtkButton" id="my_button">
+    <property name="label">Click Me</property>
+  </object>
+</interface>

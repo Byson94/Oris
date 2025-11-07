@@ -8,6 +8,13 @@ depends=(
   "niri"
   "oris-uscfg"
   "oris-ewwii-plugins"
+  "curl"
+  "jq"
+
+  # Portals
+  "xdg-desktop-portal-gnome"
+  "xdg-desktop-portal-gtk"
+  "xdg-desktop-portal"
 
   # Utils
   "yad"

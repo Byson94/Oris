@@ -259,6 +259,8 @@ layout {
 
 spawn-at-startup "/usr/share/oris/ewwii/launch.sh"
 spawn-at-startup "swww-daemon"
+spawn-at-startup "dunst"
+spawn-at-startup "/usr/lib/xdg-desktop-portal-gtk"
 
 // Uncomment this line to ask the clients to omit their client-side decorations if possible.
 // If the client will specifically ask for CSD, the request will be honored.

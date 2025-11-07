@@ -1,0 +1,61 @@
+#!/usr/bin/env bash
+
+# Get location
+read lat lon <<< $(curl -s https://ipinfo.io/loc | tr ',' ' ')
+
+# Get current weather data
+data=$(curl -s "https://api.open-meteo.com/v1/forecast?latitude=$lat&longitude=$lon&current_weather=true")
+
+temp=$(jq -r '.current_weather.temperature' <<< "$data")
+code=$(jq -r '.current_weather.weathercode' <<< "$data")
+
+# Convert weather code to human redable format
+case $code in
+  0)
+    weather="clear sky"
+    message="Bright and sunny. Enjoy it!"
+    ;;
+  1)
+    weather="mostly clear"
+    message="Mostly clear skies. Feels nice out."
+    ;;
+  2)
+    weather="partly cloudy"
+    message="A few clouds, still pleasant."
+    ;;
+  3)
+    weather="overcast"
+    message="Gray skies. Maybe take it slow."
+    ;;
+  45|48)
+    weather="foggy"
+    message="Foggy out. Go easy on the road."
+    ;;
+  51|53|55)
+    weather="drizzle"
+    message="Light rain. Keep an umbrella handy."
+    ;;
+  61|63|65)
+    weather="rainy"
+    message="Raining steadily. Perfect for tea."
+    ;;
+  71|73|75)
+    weather="snowy"
+    message="Snowfall today. Stay warm out there."
+    ;;
+  95|96|99)
+    weather="thunderstorm"
+    message="Stormy weather. Best to stay in."
+    ;;
+  *)
+    weather="unknown"
+    message="Can’t read the weather right now."
+    ;;
+esac
+
+# Output JSON
+jq -cn \
+  --arg weather "$weather" \
+  --arg temp "$temp" \
+  --arg message "$message" \
+  '{weather: $weather, temperature: $temp, message: $message}'

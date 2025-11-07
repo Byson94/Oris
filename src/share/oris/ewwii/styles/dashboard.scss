@@ -35,14 +35,14 @@
 	font-size: 2em;
 }
 
-.dashboard .dashboard_time, .dashboard .music_dashb, .dashboard .notification_tray,
-.dashboard .weather, .dashboard .todo {
+.dashboard .dashboard_time, .dashboard .notification_tray,
+.dashboard .music_dashb, .dashboard .todo {
 	background-color: lighten($background-color, 5%);
 	padding: 5px;
 	margin: 5px;
 	border-radius: 10px;
 }
 
-.dashboard .weather {
+.dashboard .music_dashb {
 	padding: 60px;
 }
