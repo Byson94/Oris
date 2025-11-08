@@ -120,17 +120,25 @@ fn show_dashboard(weather, music, is_playing, extra_classes) {
                                     text: `󰖐  ${weather_json["weather"]} |   ${weather_json["temperature"]}`, 
                                     class: "weather-heading" 
                                 }),
-                                label(#{ 
-                                    text: ``, 
-                                    class: "weather-temp" 
-                                }),
                                 label(#{ text: weather_json["message"], class: "weather-msg" })
                             ])
                         ]),
                     ]),
                     // todo box
-                    box(#{ class: "todo", hexpand: true }, [
-                        label(#{ text: "TODO" })
+                    box(#{ 
+                        class: "todo", 
+                        hexpand: true, 
+                        orientation: "v",
+                        space_evenly: false
+                    }, [
+                        box(#{ 
+                            class: "todo-header", 
+                            valign: "start", 
+                            space_evenly: false,
+                        }, [
+                            input(#{ hexpand: true }),
+                            button(#{ label: " + ", halign: "end" })
+                        ]),
                     ])
                 ]),
             ]),
@@ -164,5 +172,6 @@ enter([
             height: "80%"
         },
         windowtype: "dialog",
+        focusable: "ondemand"
 	}, show_dashboard(weather, music, is_playing, extra_classes))
 ])

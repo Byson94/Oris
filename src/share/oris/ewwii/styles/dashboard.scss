@@ -33,7 +33,7 @@
 }
 
 .dashboard .dashboard_time {
-	font-size: 2em;
+	font-size: 4em;
 	padding: 2em;
 }
 
@@ -45,8 +45,26 @@
 	border-radius: 10px;
 }
 
+.dashboard .todo entry {
+	background-color: $background-color;
+	border-radius: 5px;
+	padding: 5px;
+}
+
+.dashboard .todo entry selection {
+    background-color: $background-color-secondary;
+}
+
+.dashboard .todo button {
+	background-color: $background-color;
+	margin-left: 5px;
+	font-size: 1.5em;
+	border-radius: 5px;
+}
+
 .dashboard .music_dashb {
 	padding: 2em;
+	padding-bottom: 0;
 }
 
 .dashboard .music_dashb .music-title {
