@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # Get location
-read lat lon <<< $(curl -s https://ipinfo.io/loc | tr ',' ' ')
+read lat lon <<< $(curl -s https://ipwho.is/ | jq -r '.latitude, .longitude' | tr '\n' ' ')
 
 # Get current weather data
 data=$(curl -s "https://api.open-meteo.com/v1/forecast?latitude=$lat&longitude=$lon&current_weather=true")
@@ -50,6 +50,7 @@ case $code in
   *)
     weather="unknown"
     message="Can't read the weather right now."
+    temp="0"
     ;;
 esac
 

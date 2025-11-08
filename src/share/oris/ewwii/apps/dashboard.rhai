@@ -1,10 +1,6 @@
 import "std::env" as env;
 import "std::command" as cmd;
 
-fn get_notifications() {
-    return label(#{ text: "None Yet", style: "font-style: italic;" })
-}
-
 fn show_dashboard(weather, music, is_playing, extra_classes) {
     let time = localsignal(#{ 
         type: "poll", 
@@ -136,17 +132,40 @@ fn show_dashboard(weather, music, is_playing, extra_classes) {
                             valign: "start", 
                             space_evenly: false,
                         }, [
-                            input(#{ hexpand: true }),
-                            button(#{ label: " + ", halign: "end" })
+                            input(#{ 
+                                hexpand: true, 
+                                onaccept: `scripts/add_todo_to_ui "{}"`
+                            }),
                         ]),
+                        scroll(#{ propagate_natural_height: true }, [
+                            box(#{ orientation: "v", widget_name: "all_todos" }, [
+                                // Will be dynamically added
+                            ])
+                        ])
                     ])
                 ]),
             ]),
 
             // notification area
             box(#{ orientation: "v", class: "notification_tray", vexpand: true, hexpand: true }, [
-                label(#{ text: "Notifications", class: "bold-label", valign: "start" }),
-                get_notifications(),
+                stack(#{ selected: 0 }, [
+                    // no notifications yet page
+                    box(#{ 
+                        orientation: "v", 
+                        space_evenly: false, 
+                        valign: "center",
+                        style: "margin-bottom: 2em;"
+                    }, [
+                        label(#{ text: "", style: "font-size: 4em;" }),
+                        label(#{ 
+                            text: "No Notifications Yet", 
+                            style: "font-style: italic; margin-left: 1em;",
+                        })
+                    ]),
+                    box(#{ orientation: "v", class: "all_notifications" }, [
+                        // generated here
+                    ])
+                ])
             ]),
         ])
 	])
@@ -174,4 +193,4 @@ enter([
         windowtype: "dialog",
         focusable: "ondemand"
 	}, show_dashboard(weather, music, is_playing, extra_classes))
-])
+]);

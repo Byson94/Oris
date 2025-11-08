@@ -1,0 +1,14 @@
+#!/bin/bash
+
+TODO=$1
+
+if [[ "$TODO" == "" ]]; then
+    exit 1
+fi
+
+ewwii wc create \
+    "label(#{ text: \"$TODO\", widget_name: \"$TODO\", halign: \"start\" })" \
+    --parent "all_todos" \
+    --config .
+
+echo "$TODO" >> ~/.local/share/ewwii/todo.txt
