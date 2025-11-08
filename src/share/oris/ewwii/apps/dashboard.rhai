@@ -111,10 +111,20 @@ fn show_dashboard(weather, music, is_playing, extra_classes) {
                             class: "weather", 
                             orientation: "v", 
                         }, [
-                            box(#{ orientation: "v", valign: "center" }, [
-                                label(#{ text: weather_json["weather"] }),
-                                label(#{ text: weather_json["temperature"] }),
-                                label(#{ text: weather_json["message"] })
+                            box(#{ 
+                                orientation: "v", 
+                                valign: "center", 
+                                space_evenly: false,
+                            }, [
+                                label(#{ 
+                                    text: `󰖐  ${weather_json["weather"]} |   ${weather_json["temperature"]}`, 
+                                    class: "weather-heading" 
+                                }),
+                                label(#{ 
+                                    text: ``, 
+                                    class: "weather-temp" 
+                                }),
+                                label(#{ text: weather_json["message"], class: "weather-msg" })
                             ])
                         ]),
                     ]),

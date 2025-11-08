@@ -59,3 +59,15 @@
 .dashboard .music_dashb .music-controls {
 	font-size: 3em;
 }
+
+.dashboard .weather .weather-heading {
+	font-size: 1.2em;
+	font-weight: bold;
+	background-color: $background-color;
+	padding: 1em;
+	border-radius: 10px;
+}
+
+.dashboard .weather .weather-msg {
+	font-style: italic;
+}
