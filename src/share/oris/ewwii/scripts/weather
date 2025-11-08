@@ -49,7 +49,7 @@ case $code in
     ;;
   *)
     weather="unknown"
-    message="Can’t read the weather right now."
+    message="Can't read the weather right now."
     ;;
 esac
 

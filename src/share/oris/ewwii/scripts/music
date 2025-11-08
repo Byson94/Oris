@@ -1,0 +1,41 @@
+#!/bin/bash
+
+# Wait until MPD is available
+until mpc status >/dev/null 2>&1; do
+  echo "Waiting for MPD..."
+  sleep 0.1
+done
+
+print_title() {
+  local title
+  title=$(mpc current)
+  if [ ${#title} -gt 16 ]; then
+    echo "${title:0:16}..."
+  else
+    echo "$title"
+  fi
+}
+
+print_state() {
+  mpc status | grep -q playing && echo true || echo false
+}
+
+# Check argument
+case "$1" in
+  state)
+    print_state
+    mpc idleloop player | while read -r; do
+      print_state
+    done
+    ;;
+  title)
+    print_title
+    mpc idleloop player | while read -r; do
+      print_title
+    done
+    ;;
+  *)
+    echo "Usage: $0 {state|title}"
+    exit 1
+    ;;
+esac

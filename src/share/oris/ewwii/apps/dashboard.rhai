@@ -5,7 +5,7 @@ fn get_notifications() {
     return label(#{ text: "None Yet", style: "font-style: italic;" })
 }
 
-fn show_dashboard(extra_classes) {
+fn show_dashboard(weather, music, is_playing, extra_classes) {
     let time = localsignal(#{ 
         type: "poll", 
         initial: "", 
@@ -21,11 +21,24 @@ fn show_dashboard(extra_classes) {
 
     let username = env::get_username();
 
+    let play_btn_label = if !(is_playing == "true") { "󰐊" } else { "" };
+
+    let weather_json = if weather != "{}" {
+        parse_json(weather)
+    } else {
+        #{
+            weather: "Loading...",
+            temperature: "0.0",
+            message: "Hopefully its a good day!"
+        }
+    };
+
 	box(#{
         orientation: "v",
         space_evenly: false,
         class: `dashboard ${extra_classes}`
     }, [
+        // menu bar
         box(#{ class: "header" }, [
             localbind(#{
                 label: uptime
@@ -41,12 +54,16 @@ fn show_dashboard(extra_classes) {
             })
         ]),
 
+        // content area
         box(#{ orientation: "h", space_evenly: false, vexpand: true, hexpand: true }, [
-            box(#{ orientation: "v", space_evenly: false, vexpand: true, hexpand: true }, [
-                box(#{ orientation: "h", space_evenly: false, vexpand: true, hexpand: true }, [
+            box(#{ orientation: "v", space_evenly: false, hexpand: true }, [
+                // top side widgets
+                box(#{ orientation: "h", space_evenly: false, hexpand: true }, [
+                    // greeter
                     box(#{ class: "welcome_user", hexpand: true }, [
                         label(#{ text: `Hello, ${username}!` })
                     ]),
+                    // time widget
                     box(#{ class: "dashboard_time", hexpand: true }, [
                         box(#{ halign: "center" }, [
                             localbind(#{
@@ -57,21 +74,58 @@ fn show_dashboard(extra_classes) {
                         ])
                     ]),
                 ]),
+                // bottom side widgets
                 box(#{ 
                     orientaiton: "h", 
                     space_evenly: false, 
                     vexpand: true, 
                     hexpand: true,
                 }, [
-                    box(#{ class: "music_dashb" }, [
-                        gtk_ui("./apps/test.ui", "my_button"),
+                    box(#{ orientation: "v", space_evenly: true }, [    
+                        // music area
+                        box(#{ class: "music_dashb", orientation: "v" }, [
+                            // title
+                            label(#{ text: ": " + music, class: "music-title" }),
+                
+                            box(#{ 
+                                space_evenly: false, 
+                                spacing: 20, 
+                                halign: "center",
+                                class: "music-controls"
+                            }, [
+                                // prev button
+                                button(#{ onclick: "mpc prev", label: "󰒮" }),
+
+                                // Play button
+                                button(#{
+                                    onclick: "mpc toggle",
+                                    label: play_btn_label, // can be both play/pause button
+                                }),
+
+                                // next button
+                                button(#{ onclick: "mpc next", label: "󰒭" }),
+                            ])
+                        ]),
+                        // weather
+                        box(#{ 
+                            class: "weather", 
+                            orientation: "v", 
+                        }, [
+                            box(#{ orientation: "v", valign: "center" }, [
+                                label(#{ text: weather_json["weather"] }),
+                                label(#{ text: weather_json["temperature"] }),
+                                label(#{ text: weather_json["message"] })
+                            ])
+                        ]),
                     ]),
+                    // todo box
                     box(#{ class: "todo", hexpand: true }, [
                         label(#{ text: "TODO" })
                     ])
                 ]),
             ]),
 
+            // notification area
             box(#{ orientation: "v", class: "notification_tray", vexpand: true, hexpand: true }, [
                 label(#{ text: "Notifications", class: "bold-label", valign: "start" }),
                 get_notifications(),
@@ -87,6 +141,10 @@ let extra_classes = if is_def_var("DASHB_ANIM_CLASS") {
 };
 
 enter([
+    listen("is_playing", #{ initial: "false", cmd: "scripts/music state" }),
+    listen("music", #{ initial: "", cmd: "scripts/music title" }),
+    poll("weather", #{ initial: "{}", cmd: "scripts/weather" }),
+
 	defwindow("dashboard", #{
         geometry: #{
             x: "175px",
@@ -96,5 +154,5 @@ enter([
             height: "80%"
         },
         windowtype: "dialog",
-	}, show_dashboard(extra_classes))
+	}, show_dashboard(weather, music, is_playing, extra_classes))
 ])

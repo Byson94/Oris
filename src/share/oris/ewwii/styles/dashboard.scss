@@ -29,14 +29,16 @@
 	border-radius: 10px;
 	margin: 5px;
 	font-size: 1.5em;
+	padding: 2em;
 }
 
 .dashboard .dashboard_time {
 	font-size: 2em;
+	padding: 2em;
 }
 
 .dashboard .dashboard_time, .dashboard .notification_tray,
-.dashboard .music_dashb, .dashboard .todo {
+.dashboard .music_dashb, .dashboard .weather, .dashboard .todo {
 	background-color: lighten($background-color, 5%);
 	padding: 5px;
 	margin: 5px;
@@ -44,5 +46,16 @@
 }
 
 .dashboard .music_dashb {
-	padding: 60px;
+	padding: 2em;
+}
+
+.dashboard .music_dashb .music-title {
+	font-size: 1.1em;
+	background-color: $background-color;
+	padding: 1em;
+	border-radius: 10px;
+}
+
+.dashboard .music_dashb .music-controls {
+	font-size: 3em;
 }
