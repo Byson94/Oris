@@ -1,9 +1,5 @@
 #!/bin/bash
 
-ANIM="$1"
-DUR="$2"
-CLASS="$3"
-
 STATEFILE="$XDG_RUNTIME_DIR/ewwii_power_popup_state"
 
 if [[ -f $STATEFILE ]]; then
@@ -14,7 +10,7 @@ fi
 
 if [[ $last_state == "open" ]]; then
   echo "closed" >$STATEFILE  
-  scripts/close_with_anim "power-menu" "$ANIM" "$DUR" "$CLASS"
+  ewwii close power-menu --config .
 else
   ewwii open power-menu --config .
   echo "open" >$STATEFILE

@@ -54,7 +54,7 @@ fn left(ws_info) {
             label: "", 
             class: "sidebar-revealer", 
             style: "font-size: 20px;",
-            onclick: "scripts/sidebar-popup do-slide-out-up 0.2 SIDEBAR_ANIM_CLASS",
+            onclick: "scripts/sidebar-popup",
             timeout: "5s"
         }),
 
@@ -100,17 +100,17 @@ fn right() {
         button(#{ 
             label: "", 
             class: "power-wdgt", 
-            onclick: "scripts/power-menu-popup do-slide-out-up 0.2 POWER_ANIM_CLASS", 
+            onclick: "scripts/power-menu-popup", 
             timeout: "5s" 
         })
     ])
 }
 
 // == POWER MENU == //
-fn render_power(power_memu_anim) {
+fn render_power() {
     return box(#{
         orientation: "v",
-        class: `power-menu power-menu-content-box ${power_memu_anim}`
+        class: `power-menu power-menu-content-box`
     }, [
         button(#{ label: "Log Out", onclick: `loginctl terminate-user ${env::get_username()}` }),
         button(#{ label: "Reboot", onclick: "systemctl reboot" }),
@@ -138,7 +138,7 @@ fn draw_slider(icon, onchange, value) {
     ])
 }
 
-fn render_sidebar(volume, date, sidebar_anim) {
+fn render_sidebar(volume, date) {
     let uptime = localsignal(#{
         type: "poll",
         cmd: `awk '{printf "Uptime: %dh %dm\n", $1/3600, ($1%3600)/60}' /proc/uptime`,
@@ -147,7 +147,7 @@ fn render_sidebar(volume, date, sidebar_anim) {
 
     return box(#{
         orientation: "v",
-        class: `sidebar-content-box ${sidebar_anim}`,
+        class: `sidebar-content-box`,
         space_evenly: false,
         spacing: 5,
     }, [
@@ -155,7 +155,7 @@ fn render_sidebar(volume, date, sidebar_anim) {
         eventbox(#{ 
             cursor: "pointer", 
             class: "cal-box",
-            onclick: "scripts/calendar_popup do-slide-out-left 0.2 CAL_ANIM_CLASS",
+            onclick: "scripts/calendar_popup",
             timeout: "5s"
         }, [ label(#{ text: "Toggle Calendar" }) ]),
         box(#{
@@ -180,10 +180,10 @@ fn render_sidebar(volume, date, sidebar_anim) {
     ]);
 }
 
-fn render_cal(day, year, cal_anim) {
+fn render_cal(day, year) {
     box(#{
         orientation: "v",
-        class: `calendar_popup ${cal_anim}`
+        class: `calendar_popup`
     }, [
         box(#{ class: "calendar", orientation: "v" }, [
             box(#{ class: "calendar-in" }, [
@@ -211,24 +211,6 @@ fn render_app_menu() {
     ])
 }
 
-let power_memu_anim = if is_def_var("POWER_ANIM_CLASS") {
-    POWER_ANIM_CLASS
-} else {
-    ""
-};
-
-let sidebar_anim = if is_def_var("SIDEBAR_ANIM_CLASS") {
-    SIDEBAR_ANIM_CLASS
-} else {
-    ""
-};
-
-let cal_anim = if is_def_var("CAL_ANIM_CLASS") {
-    CAL_ANIM_CLASS
-} else {
-    ""
-};
-
 
 enter([
     listen("wsp_info", #{ initial: "{}", cmd: "scripts/workspace" }),
@@ -253,7 +235,7 @@ enter([
         },
         windowtype: "dialog",
         monitor: 0,
-    }, render_power(power_memu_anim)),
+    }, render_power()),
 
     defwindow("extra-sidebar", #{
         geometry: #{
@@ -263,7 +245,7 @@ enter([
         },
         windowtype: "dialog",
         monitor: 0,
-    }, render_sidebar(volume, date, sidebar_anim)),
+    }, render_sidebar(volume, date)),
 
     defwindow("calendar_popup", #{
         geometry: #{
@@ -274,5 +256,5 @@ enter([
             height: "60px"
         },
         windowtype: "dialog",
-    }, render_cal(day, year, cal_anim)),
+    }, render_cal(day, year)),
 ]);
