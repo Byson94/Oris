@@ -352,7 +352,8 @@ binds {
     Super+Alt+L hotkey-overlay-title="Lock the Screen: hyprlock" { spawn "hyprlock"; }
 
     // Ewwii app keybindings
-    Mod+Shift+S hotkey-overlay-title="Open Oris Settings" { spawn "ewwii" "open" "settings" "-c" "/usr/share/oris/ewwii/"; }
+    Mod+Shift+S hotkey-overlay-title="Open Oris Settings" { spawn "oris-settings"; }
+    Mod+Shift+D hotkey-overlay-title="Open Oris Dashboard" { spawn "oris-dashboard"; }
 
     // You can also use a shell. Do this if you need pipes, multiple commands, etc.
     // Note: the entire command goes as a single argument in the end.

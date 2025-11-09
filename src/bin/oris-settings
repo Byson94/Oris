@@ -1,0 +1,5 @@
+#!/bin/bash
+
+cd /usr/share/oris/ewwii/
+
+ewwii open settings -c .
