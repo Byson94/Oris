@@ -5,6 +5,10 @@ NOTIFICATION_FILE="$HOME/.local/share/ewwii/notifications.json"
 mkdir -p "$(dirname "$NOTIFICATION_FILE")"
 touch "$NOTIFICATION_FILE"
 
+if [ ! -s "$NOTIFICATION_FILE" ]; then
+  exit 0
+fi
+
 handle_notification() {
     local json="$1"
     local timestamp summary body id
