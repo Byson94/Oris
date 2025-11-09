@@ -55,15 +55,20 @@
     background-color: $background-color-secondary;
 }
 
-.dashboard .todo .todo-item {
+.dashboard .todo .todo-item, .dashboard .notification_tray .notif-item {
 	background: $background-color-secondary;
 	border-radius: 10px;
 	margin: 5px 0px;
 	padding: 5px;
 }
 
+.dashboard .notification_tray .notif-item .notif-summary {
+	font-weight: bold;
+}
+
 // delete button
-.dashboard .todo .todo-item button {
+.dashboard .todo .todo-item button, 
+.dashboard .notification_tray .notif-item button {
   background: transparent;
   border: none;
   color: $highlight;

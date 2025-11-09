@@ -10,6 +10,7 @@ ewwii wc create "$(cat <<EOF
 box(#{ 
     widget_name: "$WIDGET_ID", 
     dyn_id: "$WIDGET_ID",
+    class: "notif-item",
     space_evenly: false,
     spacing: 10,
 }, [
@@ -18,10 +19,12 @@ box(#{
             label(#{ 
                 text: "$summary", 
                 halign: "start",
+                class: "notif-summary"
             }),
             label(#{ 
                 text: "$body", 
                 halign: "start",
+                class: "notif-body"
             }),
         ])
     ]),
