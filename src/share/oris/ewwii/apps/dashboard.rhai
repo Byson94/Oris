@@ -32,7 +32,7 @@ fn show_dashboard(weather, music, is_playing, extra_classes) {
 	box(#{
         orientation: "v",
         space_evenly: false,
-        class: `dashboard ${extra_classes}`
+        class: `dashboard ${extra_classes}`,
     }, [
         // menu bar
         box(#{ class: "header" }, [
@@ -137,7 +137,7 @@ fn show_dashboard(weather, music, is_playing, extra_classes) {
                                 onaccept: `scripts/add_todo_to_ui "{}" true`
                             }),
                         ]),
-                        scroll(#{ propagate_natural_height: true }, [
+                        scroll(#{ propagate_natural_height: true, hscroll: false }, [
                             box(#{ orientation: "v", widget_name: "all_todos" }, [
                                 // Will be dynamically added
                             ])

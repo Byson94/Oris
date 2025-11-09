@@ -25,11 +25,19 @@ fi
 WIDGET_ID=$(echo "$SAFE_TODO" | tr -cd '[:alnum:]_-')
 
 ewwii wc create "$(cat <<EOF
-box(#{ widget_name: "$WIDGET_ID", dyn_id: "$WIDGET_ID" }, [
-    label(#{ 
-        text: "$SAFE_TODO", 
-        halign: "start" 
-    }),
+box(#{ 
+    widget_name: "$WIDGET_ID", 
+    dyn_id: "$WIDGET_ID",
+    class: "todo-item",
+    space_evenly: false,
+    spacing: 10,
+}, [
+    scroll(#{ vscroll: false, hexpand: true }, [
+        label(#{ 
+            text: "$SAFE_TODO", 
+            halign: "start" 
+        }),
+    ]),
     button(#{ 
         label: "Delete", 
         halign: "end",

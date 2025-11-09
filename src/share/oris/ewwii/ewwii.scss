@@ -261,6 +261,36 @@ flowboxchild:selected > .app-menu-list-item {
   animation: FadeIn 0.2s linear forwards;
 }
 
+// == Scrollbar styling == //
+scrollbar > range > trough { 
+  margin: 9px; 
+  transition: all 200ms linear; 
+  border-radius: 99px; 
+}
+
+scrollbar > range > trough > slider { 
+  transform: translateY(10px); 
+  min-width: 8px; min-height: 4px; 
+  margin: -8px; 
+  border: 8px solid transparent; 
+  border-radius: 99px; 
+  background-clip: padding-box; 
+  transition: all 200ms linear; 
+  background-color: color-mix(in srgb, $highlight 20%, $background-color-secondary); 
+}
+
+scrollbar > range > trough > slider:hover { 
+  background-color: color-mix(in srgb, $highlight 40%, $background-color-secondary); 
+}
+
+scrollbar > range > trough > slider:active { 
+  background-color: color-mix(in srgb, $highlight 60%, $background-color-secondary); 
+}
+
+scrollbar > range > trough > slider:disabled { 
+  opacity: 0; 
+}
+
 // == Animations == //
 .do-fade-out {
   animation: FadeOut 0.1s linear forwards;

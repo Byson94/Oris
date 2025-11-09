@@ -55,11 +55,28 @@
     background-color: $background-color-secondary;
 }
 
-.dashboard .todo button {
-	background-color: $background-color;
-	margin-left: 5px;
-	font-size: 1.5em;
-	border-radius: 5px;
+.dashboard .todo .todo-item {
+	background: $background-color-secondary;
+	border-radius: 10px;
+	margin: 5px 0px;
+	padding: 5px;
+}
+
+// delete button
+.dashboard .todo .todo-item button {
+  background: transparent;
+  border: none;
+  color: $highlight;
+  font-size: 1.2rem;
+  transition: color 0.2s ease, transform 0.1s ease;
+  
+  &:hover {
+    color: lighten($highlight, 10%);
+  }
+  
+  &:active {
+    transform: scale(0.95);
+  }
 }
 
 .dashboard .music_dashb {
