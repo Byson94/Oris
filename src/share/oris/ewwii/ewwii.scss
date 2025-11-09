@@ -269,8 +269,7 @@ scrollbar > range > trough {
 }
 
 scrollbar > range > trough > slider { 
-  transform: translateY(10px); 
-  min-width: 8px; min-height: 4px; 
+  min-width: 4px; min-height: 4px; 
   margin: -8px; 
   border: 8px solid transparent; 
   border-radius: 99px; 
@@ -289,6 +288,14 @@ scrollbar > range > trough > slider:active {
 
 scrollbar > range > trough > slider:disabled { 
   opacity: 0; 
+}
+
+scrollbar.vertical > range > trough > slider {
+    transform: translateX(10px);
+}
+
+scrollbar.horizontal > range > trough > slider {
+    transform: translateY(10px);
 }
 
 // == Animations == //
