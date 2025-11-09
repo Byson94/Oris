@@ -35,17 +35,53 @@ case $code in
     weather="drizzle"
     message="Light rain. Keep an umbrella handy."
     ;;
+  56|57)
+    weather="freezing drizzle"
+    message="Cold drizzle. Roads may be slick."
+    ;;
   61|63|65)
     weather="rainy"
     message="Raining steadily. Perfect for tea."
+    ;;
+  66|67)
+    weather="freezing rain"
+    message="Freezing rain. Watch for ice!"
     ;;
   71|73|75)
     weather="snowy"
     message="Snowfall today. Stay warm out there."
     ;;
-  95|96|99)
+  77)
+    weather="snow grains"
+    message="Tiny snow grains falling. Dress warmly."
+    ;;
+  80)
+    weather="light rain showers"
+    message="Scattered light showers. May pass soon."
+    ;;
+  81)
+    weather="moderate rain showers"
+    message="Off-and-on rain showers. Take a jacket."
+    ;;
+  82)
+    weather="heavy rain showers"
+    message="Heavy rain bursts. Best to stay dry inside."
+    ;;
+  85)
+    weather="light snow showers"
+    message="Light snow showers drifting by."
+    ;;
+  86)
+    weather="heavy snow showers"
+    message="Heavy snow showers. Bundle up tight."
+    ;;
+  95)
     weather="thunderstorm"
-    message="Stormy weather. Best to stay in."
+    message="Thunder rumbling. Stay indoors."
+    ;;
+  96|99)
+    weather="thunderstorm with hail"
+    message="Storm with hail. Take shelter!"
     ;;
   *)
     weather="unknown"

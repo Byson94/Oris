@@ -15,7 +15,12 @@ box(#{
     spacing: 10,
 }, [
     scroll(#{ vscroll: false, hexpand: true }, [
-        box(#{ halign: "start", orientation: "v", space_evenly: false }, [
+        box(#{ 
+            halign: "start", 
+            orientation: "v", 
+            space_evenly: false,
+            spacing: 2
+        }, [
             label(#{ 
                 text: "$summary", 
                 halign: "start",

@@ -111,6 +111,7 @@ fn show_dashboard(selected_noti_page, weather, music, is_playing, extra_classes)
                                 orientation: "v", 
                                 valign: "center", 
                                 space_evenly: false,
+                                spacing: 10
                             }, [
                                 label(#{ 
                                     text: `󰖐  ${weather_json["weather"]} |   ${weather_json["temperature"]}`, 
