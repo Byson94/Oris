@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+WIDGET_ID="$1"
+ID="$2"
+NOTIFICATION_FILE="$HOME/.local/share/ewwii/notifications.json"
+
+ewwii wc remove "$WIDGET_ID" --config .
+
+tmp=$(mktemp)
+jq -c "select(.id != \"$ID\")" "$NOTIFICATION_FILE" > "$tmp" &&
+cat "$tmp" > "$NOTIFICATION_FILE"
+rm -f "$tmp"

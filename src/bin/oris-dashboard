@@ -4,3 +4,4 @@ cd /usr/share/oris/ewwii/
 
 ewwii open dashboard -c .
 ./scripts/show_todos
+./scripts/show_notifications

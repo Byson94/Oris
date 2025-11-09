@@ -1,0 +1,24 @@
+#!/bin/bash
+
+SUMMARY="$2"
+BODY="$3"
+TIMESTAMP=$(date +"%H:%M:%S")
+FILE=~/.local/share/ewwii/notifications.json
+
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
+if [ -f "$FILE" ]; then
+  ID=$(($(wc -l <"$FILE") + 1))
+else
+  ID=1
+fi
+
+jq -n \
+  --arg id "$ID" \
+  --arg ts "$TIMESTAMP" \
+  --arg summary "$SUMMARY" \
+  --arg body "$BODY" \
+  '{id: $id, timestamp: $ts, summary: $summary, body: $body}' |
+  jq -c '.' >>"$FILE"
+
+"$SCRIPT_DIR/scripts/add_notif_to_ui" "$TIMESTAMP" "$SUMMARY" "$BODY" "$ID"

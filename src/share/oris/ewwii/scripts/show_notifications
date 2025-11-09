@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+
+NOTIFICATION_FILE="$HOME/.local/share/ewwii/notifications.json"
+
+mkdir -p "$(dirname "$NOTIFICATION_FILE")"
+touch "$NOTIFICATION_FILE"
+
+handle_notification() {
+    local json="$1"
+    local timestamp summary body id
+    timestamp=$(jq -r '.timestamp' <<<"$json")
+    summary=$(jq -r '.summary' <<<"$json")
+    body=$(jq -r '.body' <<<"$json")
+    id=$(jq -r '.id' <<<"$json")
+
+    scripts/add_notif_to_ui "$timestamp" "$summary" "$body" "$id"
+}
+
+mapfile -t notifications < "$NOTIFICATION_FILE"
+for item in "${notifications[@]}"; do
+    handle_notification "$item"
+done

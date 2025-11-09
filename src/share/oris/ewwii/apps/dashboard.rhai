@@ -1,7 +1,7 @@
 import "std::env" as env;
 import "std::command" as cmd;
 
-fn show_dashboard(weather, music, is_playing, extra_classes) {
+fn show_dashboard(selected_noti_page, weather, music, is_playing, extra_classes) {
     let time = localsignal(#{ 
         type: "poll", 
         initial: "", 
@@ -148,7 +148,7 @@ fn show_dashboard(weather, music, is_playing, extra_classes) {
 
             // notification area
             box(#{ orientation: "v", class: "notification_tray", vexpand: true, hexpand: true }, [
-                stack(#{ selected: 0 }, [
+                stack(#{ selected: selected_noti_page }, [
                     // no notifications yet page
                     box(#{ 
                         orientation: "v", 
@@ -162,8 +162,15 @@ fn show_dashboard(weather, music, is_playing, extra_classes) {
                             style: "font-style: italic; margin-left: 1em;",
                         })
                     ]),
-                    box(#{ orientation: "v", class: "all_notifications" }, [
-                        // generated here
+                    scroll(#{ hscroll: false }, [
+                        box(#{ 
+                            orientation: "v", 
+                            class: "all_notifications",
+                            widget_name: "all_notifications",
+                            space_evenly: false
+                        }, [
+                            // generated here
+                        ])
                     ])
                 ])
             ]),
@@ -173,6 +180,12 @@ fn show_dashboard(weather, music, is_playing, extra_classes) {
 
 let extra_classes = if is_def_var("DASHB_ANIM_CLASS") {
     DASHB_ANIM_CLASS
+} else {
+    ""
+};
+
+let selected_noti_page = if is_def_var("SELECTED_NOTIF_PAGE") {
+    SELECTED_NOTIF_PAGE
 } else {
     ""
 };
@@ -192,5 +205,5 @@ enter([
         },
         windowtype: "dialog",
         focusable: "ondemand"
-	}, show_dashboard(weather, music, is_playing, extra_classes))
+	}, show_dashboard(selected_noti_page, weather, music, is_playing, extra_classes))
 ]);

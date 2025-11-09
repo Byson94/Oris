@@ -1,0 +1,37 @@
+#!/bin/bash
+
+timestamp=$1
+summary=$2
+body=$3
+id=$4
+WIDGET_ID="EWWII_NOTIF_$id"
+
+ewwii wc create "$(cat <<EOF
+box(#{ 
+    widget_name: "$WIDGET_ID", 
+    dyn_id: "$WIDGET_ID",
+    space_evenly: false,
+    spacing: 10,
+}, [
+    scroll(#{ vscroll: false, hexpand: true }, [
+        box(#{ halign: "start", orientation: "v", space_evenly: false }, [
+            label(#{ 
+                text: "$summary", 
+                halign: "start",
+            }),
+            label(#{ 
+                text: "$body", 
+                halign: "start",
+            }),
+        ])
+    ]),
+    button(#{ 
+        label: "Remove", 
+        halign: "end",
+        onclick: "scripts/remove_notification \"$WIDGET_ID\" \"$id\"",
+        timeout: "5s"
+    })
+])
+EOF
+)" --parent "all_notifications" --config .
+ewwii update -pi SELECTED_NOTIF_PAGE=1 --config .
