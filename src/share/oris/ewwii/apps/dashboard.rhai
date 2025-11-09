@@ -134,7 +134,7 @@ fn show_dashboard(weather, music, is_playing, extra_classes) {
                         }, [
                             input(#{ 
                                 hexpand: true, 
-                                onaccept: `scripts/add_todo_to_ui "{}"`
+                                onaccept: `scripts/add_todo_to_ui "{}" true`
                             }),
                         ]),
                         scroll(#{ propagate_natural_height: true }, [

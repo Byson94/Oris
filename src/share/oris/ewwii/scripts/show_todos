@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+
+TODO_FILE="$HOME/.local/share/ewwii/todo.txt"
+
+mkdir -p "$(dirname "$TODO_FILE")"
+touch "$TODO_FILE"
+
+mapfile -t todos < "$TODO_FILE"
+
+for item in "${todos[@]}"; do
+    scripts/add_todo_to_ui "$item"
+done

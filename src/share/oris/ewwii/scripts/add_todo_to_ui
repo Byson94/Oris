@@ -1,14 +1,41 @@
 #!/bin/bash
 
 TODO=$1
+IS_APPEND=$2
 
 if [[ "$TODO" == "" ]]; then
     exit 1
 fi
 
-ewwii wc create \
-    "label(#{ text: \"$TODO\", widget_name: \"$TODO\", halign: \"start\" })" \
-    --parent "all_todos" \
-    --config .
+TODO_FILE="$HOME/.local/share/ewwii/todo.txt"
+SAFE_TODO=$(printf '%s' "$TODO" | sed 's/"/\\"/g')
 
-echo "$TODO" >> ~/.local/share/ewwii/todo.txt
+if [[ "$IS_APPEND" == "true" ]]; then
+    mkdir -p "$(dirname "$TODO_FILE")"
+    touch "$TODO_FILE"
+
+    if grep -Fxq "$SAFE_TODO" "$TODO_FILE"; then
+        echo "Todo '$SAFE_TODO' already exists."
+        exit 1
+    fi
+
+    echo "$SAFE_TODO" >> ~/.local/share/ewwii/todo.txt
+fi
+
+WIDGET_ID=$(echo "$SAFE_TODO" | tr -cd '[:alnum:]_-')
+
+ewwii wc create "$(cat <<EOF
+box(#{ widget_name: "$WIDGET_ID", dyn_id: "$WIDGET_ID" }, [
+    label(#{ 
+        text: "$SAFE_TODO", 
+        halign: "start" 
+    }),
+    button(#{ 
+        label: "Delete", 
+        halign: "end",
+        onclick: "bash -c 'ewwii wc remove \"$WIDGET_ID\" --config . && sed -i \"/^$SAFE_TODO\$/d\" \"$TODO_FILE\"'",
+        timeout: "5s"
+    })
+])
+EOF
+)" --parent "all_todos" --config .
