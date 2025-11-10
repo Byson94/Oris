@@ -7,7 +7,6 @@ depends=(
   # core libs
   "niri"
   "oris-uscfg"
-  "oris-ewwii-plugins"
   "curl"
   "jq"
 
