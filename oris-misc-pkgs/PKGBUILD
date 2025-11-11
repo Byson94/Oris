@@ -8,5 +8,6 @@ depend=(
   "alacritty"
   "mousepad"
   "mpd"
+  "mpc"
   "fastfetch"
 )
