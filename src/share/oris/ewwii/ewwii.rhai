@@ -83,7 +83,7 @@ fn right() {
     let time = localsignal(#{ 
         type: "poll", 
         initial: "", 
-        cmd: `v=$(date +%H:%M); echo "  $v"`, 
+        cmd: `v=$(date +%H:%M); echo "   $v"`, 
         interval: "1m" 
     });
     return box(#{ 
