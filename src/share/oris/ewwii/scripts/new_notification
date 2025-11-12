@@ -21,4 +21,4 @@ jq -n \
   '{id: $id, timestamp: $ts, summary: $summary, body: $body}' |
   jq -c '.' >>"$FILE"
 
-"$SCRIPT_DIR/scripts/add_notif_to_ui" "$TIMESTAMP" "$SUMMARY" "$BODY" "$ID"
+"$SCRIPT_DIR/add_notif_to_ui" "$TIMESTAMP" "$SUMMARY" "$BODY" "$ID"
