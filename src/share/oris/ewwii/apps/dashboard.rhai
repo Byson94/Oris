@@ -89,6 +89,13 @@ fn show_dashboard(selected_noti_page, weather, music, is_playing, extra_classes)
                                 halign: "center",
                                 class: "music-controls"
                             }, [
+                                // play random button
+                                button(#{ 
+                                    onclick: "mpc random off; mpc play $(shuf -i 1-$(mpc playlist | wc -l) -n 1)", 
+                                    label: "󰒟",
+                                    class: "special-control"
+                                }),
+
                                 // prev button
                                 button(#{ onclick: "mpc prev", label: "󰒮" }),
 
@@ -100,6 +107,13 @@ fn show_dashboard(selected_noti_page, weather, music, is_playing, extra_classes)
 
                                 // next button
                                 button(#{ onclick: "mpc next", label: "󰒭" }),
+
+                                // restart button
+                                button(#{ 
+                                    onclick: "mpc seek 0", 
+                                    label: "󰜉",
+                                    class: "special-control"
+                                }),
                             ])
                         ]),
                         // weather
