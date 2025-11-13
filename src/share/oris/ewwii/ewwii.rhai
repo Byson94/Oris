@@ -252,8 +252,8 @@ enter([
             x: "175px",
             y: "10px",
             anchor: "top left",
-            width: "270px",
-            height: "60px"
+            width: "280px",
+            height: "150px"
         },
         windowtype: "dialog",
     }, render_cal(day, year)),
