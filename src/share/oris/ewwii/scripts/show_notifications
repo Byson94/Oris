@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+set -euo pipefail
 
 NOTIFICATION_FILE="$HOME/.local/share/ewwii/notifications.json"
 
@@ -9,18 +10,21 @@ if [ ! -s "$NOTIFICATION_FILE" ]; then
   exit 0
 fi
 
-handle_notification() {
-    local json="$1"
-    local timestamp summary body id
+mapfile -t notifications < "$NOTIFICATION_FILE"
+
+notif_args=()
+
+for json in "${notifications[@]}"; do
     timestamp=$(jq -r '.timestamp' <<<"$json")
     summary=$(jq -r '.summary' <<<"$json")
     body=$(jq -r '.body' <<<"$json")
     id=$(jq -r '.id' <<<"$json")
 
-    scripts/add_notif_to_ui "$timestamp" "$summary" "$body" "$id"
-}
+    [[ -z "$id" || "$id" == "null" ]] && continue
 
-mapfile -t notifications < "$NOTIFICATION_FILE"
-for item in "${notifications[@]}"; do
-    handle_notification "$item"
+    notif_args+=("$timestamp" "$summary" "$body" "$id")
 done
+
+if [[ ${#notif_args[@]} -gt 0 ]]; then
+    scripts/add_notif_to_ui -m "${notif_args[@]}"
+fi

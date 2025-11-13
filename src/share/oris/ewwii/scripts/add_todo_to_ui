@@ -1,30 +1,60 @@
 #!/bin/bash
 
-TODO=$1
-IS_APPEND=$2
+set -euo pipefail
 
-if [[ "$TODO" == "" ]]; then
+TODO_FILE="$HOME/.local/share/ewwii/todo.txt"
+mkdir -p "$(dirname "$TODO_FILE")"
+touch "$TODO_FILE"
+
+MODE=""
+IS_APPEND="false"
+todos=()
+
+while [[ $# -gt 0 ]]; do
+    case "$1" in
+        -s|--single)
+            MODE="single"
+            todos+=("$2")
+            shift 2
+            ;;
+        -m|--map)
+            MODE="map"
+            shift
+            while [[ $# -gt 0 && "$1" != -* ]]; do
+                todos+=("$1")
+                shift
+            done
+            ;;
+        -a|--append)
+            IS_APPEND="true"
+            shift
+            ;;
+        *)
+            echo "Unknown argument: $1" >&2
+            exit 1
+            ;;
+    esac
+done
+
+if [[ ${#todos[@]} -eq 0 ]]; then
+    echo "No todos provided. Use -s <todo> or -m <list>."
     exit 1
 fi
 
-TODO_FILE="$HOME/.local/share/ewwii/todo.txt"
-SAFE_TODO=$(printf '%s' "$TODO" | sed 's/"/\\"/g')
+widgets=()
 
-if [[ "$IS_APPEND" == "true" ]]; then
-    mkdir -p "$(dirname "$TODO_FILE")"
-    touch "$TODO_FILE"
+for TODO in "${todos[@]}"; do
+    [[ -z "$TODO" ]] && continue
+    SAFE_TODO=$(printf '%s' "$TODO" | sed 's/"/\\"/g')
+    WIDGET_ID=$(echo "$SAFE_TODO" | tr -cd '[:alnum:]_-')
 
-    if grep -Fxq "$SAFE_TODO" "$TODO_FILE"; then
-        echo "Todo '$SAFE_TODO' already exists."
-        exit 1
+    if [[ "$IS_APPEND" == "true" ]]; then
+        if ! grep -Fxq "$SAFE_TODO" "$TODO_FILE"; then
+            echo "$SAFE_TODO" >> "$TODO_FILE"
+        fi
     fi
 
-    echo "$SAFE_TODO" >> ~/.local/share/ewwii/todo.txt
-fi
-
-WIDGET_ID=$(echo "$SAFE_TODO" | tr -cd '[:alnum:]_-')
-
-ewwii wc create "$(cat <<EOF
+    widget=$(cat <<EOF
 box(#{ 
     widget_name: "$WIDGET_ID", 
     dyn_id: "$WIDGET_ID",
@@ -46,4 +76,8 @@ box(#{
     })
 ])
 EOF
-)" --parent "all_todos" --config .
+)
+    widgets+=("$widget")
+done
+
+ewwii wc create "${widgets[@]}" --parent "all_todos" --config .

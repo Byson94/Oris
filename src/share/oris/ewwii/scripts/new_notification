@@ -22,4 +22,4 @@ jq -n \
   jq -c '.' >>"$FILE"
 
 cd "$SCRIPT_DIR/.."
-./scripts/add_notif_to_ui "$TIMESTAMP" "$SUMMARY" "$BODY" "$ID"
+./scripts/add_notif_to_ui -s "$TIMESTAMP" "$SUMMARY" "$BODY" "$ID"

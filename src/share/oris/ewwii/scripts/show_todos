@@ -6,7 +6,4 @@ mkdir -p "$(dirname "$TODO_FILE")"
 touch "$TODO_FILE"
 
 mapfile -t todos < "$TODO_FILE"
-
-for item in "${todos[@]}"; do
-    scripts/add_todo_to_ui "$item"
-done
+scripts/add_todo_to_ui -m "${todos[@]}"

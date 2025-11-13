@@ -149,7 +149,7 @@ fn show_dashboard(selected_noti_page, weather, music, is_playing, extra_classes)
                         }, [
                             input(#{ 
                                 hexpand: true, 
-                                onaccept: `scripts/add_todo_to_ui "{}" true`
+                                onaccept: `scripts/add_todo_to_ui -s "{}" -a`
                             }),
                         ]),
                         scroll(#{ propagate_natural_height: true, hscroll: false }, [
