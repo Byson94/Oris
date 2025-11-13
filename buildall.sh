@@ -1,7 +1,7 @@
 #!/bin/bash
 set -euo pipefail
 
-dirs=("oris-ewwii-plugins" "oris-uscfg" "oris-misc-pkgs" ".")
+dirs=("oris-uscfg" "oris-misc-pkgs" ".")
 install_flag=false
 pkg_files=()
 
