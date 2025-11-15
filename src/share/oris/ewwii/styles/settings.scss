@@ -15,7 +15,23 @@
 	font-weight: bold;
 	color: #82aaf9;
 	font-size: 18px;
-	text-decoration: underline;
+}
+
+.small-label {
+	font-size: 13px;
+	color: #82aaf9;
+}
+
+.horizontal_rule_dark {
+	background-color: $background-color-light; 
+	opacity: 0.5;
+	padding: 1px;
+}
+
+.horizontal_rule {
+	background-color: $background-color-light; 
+	opacity: 0.2;
+	padding: 1px;
 }
 
 .settings .sidebar {
@@ -36,17 +52,21 @@
 	padding-bottom: 100px;
 }
 
-.settings .page1 .preferred_color button {
+.settings .theme-button {
 	background: $background-color-secondary;
 	margin: 5px;
 	border-radius: 5px;
 	padding: 5px;
 }
 
-.settings .page2 .current_wallpaper entry {
+.input-area {
 	background: $background-color-light;
 	border-radius: 10px;
 	padding: 10px;
+}
+
+.input-area selection {
+	background-color: darken($background-color-light, 8%);
 }
 
 .settings .sidebar .close_btn {
