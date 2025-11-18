@@ -108,8 +108,13 @@ fn page_3() {
     }, [
         label(#{ text: "Function Settings", halign: "start", class: "bold-label-heading" }),
         horizontal_rule_dark(),
-        box(#{ orientation: "v", class: "battery_settings" }, [
-            label(#{ text: "Battery", halign: "start", class: "bold-label" }),
+        label(#{ text: "Battery Functions", halign: "start", class: "bold-label" }),
+        box(#{ orientation: "v", space_evenly: false, spacing: 5 }, [
+            label(#{ text: "Alert When", halign: "start", class: "small-label" }),
+            box(#{ orientation: "h", spacing: 5 }, [
+                input(#{ class: "input-area" }),
+                input(#{ class: "input-area" }),
+            ]),
         ]),
     ])
 }
@@ -142,7 +147,7 @@ fn show_settings(page, anim_class) {
             stack(#{
                 selected: page,
                 class: "content_space",
-                hexpand: true
+                hexpand: true,
             }, [                
                 page_1(),
                 page_2(),
