@@ -32,3 +32,7 @@ It is still under development and it is not expected to work properly under any 
 - [x] Lockscreen (needs improvement tho)
 - [ ] Dashboard
 - [ ] Wallpaper menu
+- [x] Settings
+- [ ] Improved settings
+- [ ] Advanced features
+- [ ] Better animations
