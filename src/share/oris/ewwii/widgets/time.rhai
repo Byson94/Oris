@@ -9,7 +9,7 @@ fn render_time(time) {
 let time = localsignal(#{ 
     type: "poll", 
     initial: "", 
-    cmd: "date '+%H:%M'", 
+    cmd: `time=$(date '+%H:%M' | tr -d '[:space:]'); echo "$time"`, 
     interval: "1m" 
 });
 
