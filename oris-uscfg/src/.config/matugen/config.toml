@@ -16,7 +16,7 @@ input_path = '~/.config/matugen/templates/alacritty/alacritty.toml'
 output_path = '~/.config/alacritty/colors.toml'
 
 [templates.dunst]
-input_path = '~/.config/matugen/templates/dunst/dunstrc-colors'
+input_path = '~/.config/matugen/templates/dunst/dunstrc'
 output_path = '~/.config/dunst/dunstrc'
 
 [templates.fuzzel]

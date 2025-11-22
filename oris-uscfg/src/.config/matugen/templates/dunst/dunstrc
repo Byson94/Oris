@@ -80,3 +80,8 @@ timeout = 0
 background = "{{colors.surface.default.hex}}"
 foreground = "{{colors.on_surface.default.hex}}"
 highlight = "{{colors.error.default.hex}}"
+
+[rule_script_example]
+appname = "*"
+summary = "*"
+script = /usr/share/oris/ewwii/scripts/new_notification
