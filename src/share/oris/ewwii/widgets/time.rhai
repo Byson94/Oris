@@ -1,15 +1,17 @@
 fn render_time(time) {
-	localbind(#{
-		label: time
-	}, [
-		label(#{ text: ""})
+	box(#{}, [
+		localbind(#{
+			label: time
+		}, [
+			label(#{ text: ""})
+		])
 	])
 }
 
 let time = localsignal(#{ 
     type: "poll", 
     initial: "", 
-    cmd: `time=$(date '+%H:%M' | tr -d '[:space:]'); echo "$time"`, 
+    cmd: `date '+%H:%M'`, 
     interval: "1m" 
 });
 
