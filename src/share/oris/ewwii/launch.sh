@@ -9,6 +9,8 @@ if [ ! -e "$HOME/.local/share/ewwii/colors.scss" ]; then
 fi
 
 ewwii daemon -c "$CFG" &
+DAEMON_PID=$!
+
 ewwii open bar -c "$CFG"
 ewwii open time -c "$CFG"
 
@@ -38,6 +40,12 @@ render_osd() {
 }
 
 while true; do
+    # Exiting if daemon died
+    if ! kill -0 "$DAEMON_PID" 2>/dev/null; then
+        echo "Daemon died. Exiting script."
+        exit 1
+    fi
+
     current_state=$(pamixer --get-volume)
     if [ "$current_state" != "$old_state" ]; then
         render_osd "$current_state" "volosd"
