@@ -1,5 +1,5 @@
 fn render_time(time) {
-	box(#{}, [
+	box(#{ halign: "center" }, [
 		localbind(#{
 			label: time
 		}, [
