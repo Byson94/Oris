@@ -30,7 +30,7 @@ It is still under development and it is not expected to work properly under any 
 - [x] Widget animations
 - [x] OSD
 - [x] Lockscreen (needs improvement tho)
-- [ ] Dashboard
+- [x] Dashboard
 - [ ] Wallpaper menu
 - [x] Settings
 - [ ] Improved settings
