@@ -1,0 +1,63 @@
+#!/bin/bash
+
+CONFIG_FILE="$HOME/.local/share/oris/settings.json"
+
+load_thresholds() {
+    LOW_THRESHOLD=$(jq -r '.["batt-notifier"].low // 20' "$CONFIG_FILE")
+    CRITICAL_THRESHOLD=$(jq -r '.["batt-notifier"].critical // 10' "$CONFIG_FILE")
+    FULL_THRESHOLD=$(jq -r '.["batt-notifier"].full // 95' "$CONFIG_FILE")
+}
+
+BAT_PATH="/sys/class/power_supply/BAT0"
+
+if [ ! -d "$BAT_PATH" ]; then
+    echo "No battery detected. Exiting."
+    exit 0
+fi
+
+# initial load
+load_thresholds
+
+warned_low=false
+warned_crit=false
+notified_full=false
+
+# hot reload
+inotifywait -mq -e modify "$CONFIG_FILE" |
+while read -r _; do
+    load_thresholds
+done &
+watcher_pid=$!
+
+trap "kill $watcher_pid 2>/dev/null" EXIT
+
+while true; do
+    percent=$(<"$BAT_PATH/capacity")
+    status=$(<"$BAT_PATH/status")
+
+    if [[ "$status" == "Discharging" ]]; then
+        if (( percent <= CRITICAL_THRESHOLD )) && [ "$warned_crit" = false ]; then
+            notify-send -u critical "Critical Battery" "Battery at ${percent}%. Plug in now!"
+            warned_crit=true
+        elif (( percent <= LOW_THRESHOLD )) && [ "$warned_low" = false ]; then
+            notify-send -u normal "Low Battery" "Battery at ${percent}%. Consider plugging in."
+            warned_low=true
+        fi
+
+    # at 100%, the status will be "Full" and not ""Charging"
+    elif [[ "$status" == "Charging" ]]; then
+        if (( percent >= FULL_THRESHOLD )) && [ "$notified_full" = false ]; then
+            notify-send -u normal "Battery Full" "You can unplug now."
+            notified_full=true
+        fi
+
+        warned_low=false
+        warned_crit=false
+    else
+        warned_low=false
+        warned_crit=false
+        notified_full=false
+    fi
+
+    sleep 60
+done

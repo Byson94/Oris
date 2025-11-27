@@ -59,6 +59,10 @@
 	padding: 5px;
 }
 
+.settings .settings-btn-highlighted {
+	background-color: $background-color-light;
+}
+
 .input-area {
 	background: $background-color-light;
 	border-radius: 10px;

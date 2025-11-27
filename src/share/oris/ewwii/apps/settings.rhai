@@ -27,13 +27,15 @@ fn page_1() {
         box(#{ orientation: "v", space_evenly: false, spacing: 5 }, [
             label(#{ text: "Preferred Color", halign: "start", class: "small-label" }),
             box(#{}, [
-                button(#{ 
+                button(#{
                     label: "Dark", onclick: "gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark'",
-                    class: "theme-button"
+                    class: "theme-button",
+                    widget_name: "preferred_color_dark_btn",
                 }),
                 button(#{ 
                     label: "Light", onclick: "gsettings set org.gnome.desktop.interface color-scheme 'prefer-light'",
-                    class: "theme-button"
+                    class: "theme-button",
+                    widget_name: "preferred_color_light_btn",
                 })
             ]),
         ])
@@ -112,8 +114,8 @@ fn page_3() {
         box(#{ orientation: "v", space_evenly: false, spacing: 5 }, [
             label(#{ text: "Alert When", halign: "start", class: "small-label" }),
             box(#{ orientation: "h", spacing: 5 }, [
-                input(#{ class: "input-area" }),
-                input(#{ class: "input-area" }),
+                input(#{ class: "input-area", placeholder: "Battery low percent..." }),
+                input(#{ class: "input-area", placeholder: "Battery full percent..." }),
             ]),
         ]),
     ])

@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-TODO_FILE="$HOME/.local/share/ewwii/todo.txt"
+TODO_FILE="$HOME/.local/share/oris/todo.txt"
 
 mkdir -p "$(dirname "$TODO_FILE")"
 touch "$TODO_FILE"

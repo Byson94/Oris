@@ -2,7 +2,7 @@
 
 set -euo pipefail
 
-TODO_FILE="$HOME/.local/share/ewwii/todo.txt"
+TODO_FILE="$HOME/.local/share/oris/todo.txt"
 mkdir -p "$(dirname "$TODO_FILE")"
 touch "$TODO_FILE"
 

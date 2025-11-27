@@ -3,7 +3,7 @@
 SUMMARY="$2"
 BODY="$3"
 TIMESTAMP=$(date +"%H:%M:%S")
-FILE=~/.local/share/ewwii/notifications.json
+FILE=~/.local/share/oris/notifications.json
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 

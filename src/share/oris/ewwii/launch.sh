@@ -4,8 +4,12 @@
 CFG=/usr/share/oris/ewwii/
 
 # Setup theme
-if [ ! -e "$HOME/.local/share/ewwii/colors.scss" ]; then
-    cat "$CFG/ewwii_backup_theme.scss" > "$HOME/.local/share/ewwii/colors.scss"
+if [ ! -e "$HOME/.local/share/oris/colors.scss" ]; then
+    cat "$CFG/ewwii_backup_theme.scss" > "$HOME/.local/share/oris/colors.scss"
+fi
+
+if [ ! -e "$HOME/.local/share/oris/settings.scss" ]; then
+    cat "$CFG/ewwii_backup_settings.scss" > "$HOME/.local/share/oris/style_settings.scss"
 fi
 
 ewwii daemon -c "$CFG" &

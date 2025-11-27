@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-NOTIFICATION_FILE="$HOME/.local/share/ewwii/notifications.json"
+NOTIFICATION_FILE="$HOME/.local/share/oris/notifications.json"
 
 mkdir -p "$(dirname "$NOTIFICATION_FILE")"
 touch "$NOTIFICATION_FILE"

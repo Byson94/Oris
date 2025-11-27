@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 WIDGET_ID="$1"
 ID="$2"
-NOTIFICATION_FILE="$HOME/.local/share/ewwii/notifications.json"
+NOTIFICATION_FILE="$HOME/.local/share/oris/notifications.json"
 
 ewwii wc remove "$WIDGET_ID" --config .
 
