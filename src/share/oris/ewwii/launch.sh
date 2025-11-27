@@ -4,17 +4,16 @@
 CFG=/usr/share/oris/ewwii/
 
 # Setup theme
+mkdir -p "$HOME/.local/share/oris"
 if [ ! -e "$HOME/.local/share/oris/colors.scss" ]; then
     cat "$CFG/ewwii_backup_theme.scss" > "$HOME/.local/share/oris/colors.scss"
 fi
 
-if [ ! -e "$HOME/.local/share/oris/settings.scss" ]; then
+if [ ! -e "$HOME/.local/share/oris/style_settings.scss" ]; then
     cat "$CFG/ewwii_backup_settings.scss" > "$HOME/.local/share/oris/style_settings.scss"
 fi
 
 ewwii daemon -c "$CFG" &
-DAEMON_PID=$!
-
 ewwii open bar -c "$CFG"
 ewwii open time -c "$CFG"
 
@@ -45,7 +44,7 @@ render_osd() {
 
 while true; do
     # Exiting if daemon died
-    if ! kill -0 "$DAEMON_PID" 2>/dev/null; then
+    if ! ewwii ping -c "$CFG" >/dev/null 2>&1; then
         echo "Daemon died. Exiting script."
         exit 1
     fi
