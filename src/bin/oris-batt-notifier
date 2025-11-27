@@ -44,7 +44,7 @@ while true; do
             warned_low=true
         fi
 
-    # at 100%, the status will be "Full" and not ""Charging"
+    # at 100%, the status will be "Full" and not "Charging"
     elif [[ "$status" == "Charging" ]]; then
         if (( percent >= FULL_THRESHOLD )) && [ "$notified_full" = false ]; then
             notify-send -u normal "Battery Full" "You can unplug now."

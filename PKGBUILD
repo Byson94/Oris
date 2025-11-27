@@ -9,7 +9,7 @@ depends=(
   "oris-uscfg"
   "curl"
   "jq"
-  "inotifywait"
+  "inotify-tools"
 
   # Portals
   "xdg-desktop-portal-gnome"
