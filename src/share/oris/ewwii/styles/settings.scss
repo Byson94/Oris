@@ -2,7 +2,7 @@
 	background: $background-color;
 	border-radius: 20px;
 	font-size: 15px;
-	border: 2px solid $background-color-light;
+	border: 2px solid $outline;
 	opacity: 0;
 	animation: FadeIn 0.2s linear forwards;
 }
@@ -23,13 +23,13 @@
 }
 
 .horizontal_rule_dark {
-	background-color: $background-color-light; 
+	background-color: $outline; 
 	opacity: 0.5;
 	padding: 1px;
 }
 
 .horizontal_rule {
-	background-color: $background-color-light; 
+	background-color: $outline; 
 	opacity: 0.2;
 	padding: 1px;
 }
@@ -60,21 +60,21 @@
 }
 
 .settings .settings-btn-highlighted {
-	background-color: $background-color-light;
+	background-color: $outline;
 }
 
 .input-area {
-	background: $background-color-light;
+	background: $outline;
 	border-radius: 10px;
 	padding: 10px;
 }
 
 .input-area selection {
-	background-color: darken($background-color-light, 8%);
+	background-color: darken($outline, 8%);
 }
 
 .settings .sidebar .close_btn {
-	background: mix($background-color-light, crimson);
+	background: mix($outline, crimson);
 }
 
 .settings .page2 .new_wallpaper button {

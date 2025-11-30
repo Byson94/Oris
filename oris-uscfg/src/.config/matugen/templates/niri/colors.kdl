@@ -1,0 +1,6 @@
+layout {
+    border {
+        active-color "{{colors.surface_container.default.hex}}"
+        inactive-color "{{colors.surface_container_lowest.default.hex}}"
+    }
+}
