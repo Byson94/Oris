@@ -5,8 +5,8 @@
     follow = none
     width = 400
     height = (0, 300)
-    origin = top-right
-    offset = (10, 50)
+    origin = top-center
+    offset = (10, 10)
     scale = 0
     notification_limit = 20
     progress_bar = true
@@ -24,9 +24,9 @@
     padding = 8
     horizontal_padding = 8
     text_icon_padding = 0
-    frame_width = 1
-    frame_color = "{{colors.primary.default.hex}}"
-    gap_size = 0
+    frame_width = 2
+    frame_color = "{{colors.surface_container_highest.default.hex}}"
+    gap_size = 5
     separator_color = frame
     sort = yes
     font = Monospace 10
