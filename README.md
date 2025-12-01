@@ -2,6 +2,12 @@
 
 A desktop environment made for AxOS.
 
+## Screenshots
+
+<img width="1366" height="768" alt="image" src="https://github.com/user-attachments/assets/9b97ed11-2b6f-41b4-96b9-b734937ccab3" />
+<img width="1366" height="52" alt="image" src="https://github.com/user-attachments/assets/1d1e6805-7067-477d-a6b6-3fc74b9e254d" />
+<img width="1110" height="635" alt="image" src="https://github.com/user-attachments/assets/7fd9851c-8ef4-45fd-a015-b6b57eafdd99" />
+
 ## Installing
 
 The installation is simple. Just clone this repository and run the `install.sh` script.
