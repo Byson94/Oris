@@ -102,6 +102,8 @@ input {
     position x=1280 y=0
 }
 
+include "colors.kdl"
+
 // Settings that influence how windows are positioned and sized.
 // Find more information on the wiki:
 // https://github.com/YaLTeR/niri/wiki/Configuration:-Layout
@@ -192,8 +194,8 @@ layout {
 
         width 2
 
-        active-color "#9197ae"
-        inactive-color "#505050"
+        // active-color "#9197ae"
+        // inactive-color "#505050"
 
         // Color of the border around windows that request your attention.
         urgent-color "#9b0000"
