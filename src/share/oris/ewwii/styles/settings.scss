@@ -73,6 +73,10 @@
 	background-color: darken($outline, 8%);
 }
 
+.input-area > text > placeholder {
+    color: #aaa;
+}
+
 .settings .sidebar .close_btn {
 	background: mix($outline, crimson);
 }
