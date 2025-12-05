@@ -114,8 +114,14 @@ fn page_3() {
         box(#{ orientation: "v", space_evenly: false, spacing: 5 }, [
             label(#{ text: "Alert When", halign: "start", class: "small-label" }),
             box(#{ orientation: "h", spacing: 5 }, [
-                input(#{ class: "input-area", placeholder: "Battery low percent..." }),
-                input(#{ class: "input-area", placeholder: "Battery full percent..." }),
+                input(#{ 
+                    class: "input-area", 
+                    placeholder: "Battery low percent...",
+                }),
+                input(#{ 
+                    class: "input-area", 
+                    placeholder: "Battery full percent...",
+                }),
             ]),
         ]),
     ])
