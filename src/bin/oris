@@ -39,7 +39,7 @@ case "$1" in
     fi
   done
 
-  niri
+  niri-session
   ;;
 *)
   echo "Unknown option: $1"
