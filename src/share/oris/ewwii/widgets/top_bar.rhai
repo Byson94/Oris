@@ -207,7 +207,7 @@ fn render_app_menu() {
 }
 
 
-enter([
+tree([
     listen("wsp_info", #{ initial: "{}", cmd: "scripts/workspace" }),
     poll("date", #{ initial: "", cmd: "date +%d/%m/%Y", interval: "24h" }),
     listen("volume", #{ initial: "", cmd: "scripts/getvol" }),

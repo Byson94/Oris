@@ -205,7 +205,7 @@ let selected_noti_page = if is_def_var("SELECTED_NOTIF_PAGE") {
     ""
 };
 
-enter([
+tree([
     listen("is_playing", #{ initial: "false", cmd: "scripts/music state" }),
     listen("music", #{ initial: "", cmd: "scripts/music title" }),
     poll("weather", #{ initial: "{}", cmd: "scripts/weather" }),

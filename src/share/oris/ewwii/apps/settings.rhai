@@ -177,7 +177,7 @@ let anim_class = if is_def_var("SETTINGS_ANIM_CLASS") {
     ""
 };
 
-enter([
+tree([
 	defwindow("settings", #{
         geometry: #{
             x: "175px",

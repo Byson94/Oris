@@ -67,7 +67,7 @@ if is_def_var("new_app_list") {
     app_list = slib::call_fn("app_list", []);
 }
 
-enter([
+tree([
     defwindow("application_menu", #{
         geometry: #{
             anchor: "top center",

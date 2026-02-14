@@ -15,7 +15,7 @@ let time = localsignal(#{
     interval: "1m" 
 });
 
-enter([
+tree([
 	defwindow("time", #{
 		geometry: #{ anchor: "center" },
         stacking: "bg",
