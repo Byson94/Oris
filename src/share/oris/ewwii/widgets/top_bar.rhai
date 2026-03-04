@@ -107,7 +107,7 @@ fn render_power() {
         orientation: "v",
         class: `power-menu power-menu-content-box`
     }, [
-        button(#{ label: "Log Out", onclick: `loginctl terminate-user ${env::get_username()}` }),
+        button(#{ label: "Log Out", onclick: "wayland-logout" }),
         button(#{ label: "Reboot", onclick: "systemctl reboot" }),
         button(#{ label: "Shutdown", class: "shutdown-btn", onclick: "systemctl poweroff" }),
     ]);
