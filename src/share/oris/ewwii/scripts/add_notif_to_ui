@@ -91,4 +91,4 @@ EOF
 done
 
 ewwii wc create "${widgets[@]}" --parent "all_notifications" --config .
-ewwii update -pi SELECTED_NOTIF_PAGE=1 --config .
+ewwii update SELECTED_NOTIF_PAGE=1 --config .

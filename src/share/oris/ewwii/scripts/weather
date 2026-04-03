@@ -91,8 +91,5 @@ case $code in
 esac
 
 # Output JSON
-jq -cn \
-  --arg weather "$weather" \
-  --arg temp "$temp" \
-  --arg message "$message" \
-  '{weather: $weather, temperature: $temp, message: $message}'
+ewwii wc property-update --widget "weather-and-temperature" label="󰖐  ${weather} |   ${temp}" -c .
+ewwii wc property-update --widget "weather-message" label="${message}" -c .

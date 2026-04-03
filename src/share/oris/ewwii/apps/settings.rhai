@@ -127,10 +127,10 @@ fn page_3() {
     ])
 }
 
-fn show_settings(page, anim_class) {
+fn show_settings() {
 	box(#{
         orientation: "v",
-        class: `settings ${anim_class}`
+        class: SETTINGS_ANIM_CLASS
     }, [
         box(#{
             orientation: "h",
@@ -141,19 +141,19 @@ fn show_settings(page, anim_class) {
                 orientation: "v",
                 space_evenly: false,
             }, [
-                button(#{ label: "Color", onclick: "ewwii update -pi SHOW_SETTING_PAGE=0 -c ." }),
-                button(#{ label: "Appearance", onclick: "ewwii update -pi SHOW_SETTING_PAGE=1 -c ." }),
-                button(#{ label: "Functions", onclick: "ewwii update -pi SHOW_SETTING_PAGE=2 -c ." }),
+                button(#{ label: "Color", onclick: "ewwii update SHOW_SETTING_PAGE=0 -c ." }),
+                button(#{ label: "Appearance", onclick: "ewwii update SHOW_SETTING_PAGE=1 -c ." }),
+                button(#{ label: "Functions", onclick: "ewwii update SHOW_SETTING_PAGE=2 -c ." }),
                 button(#{ 
                     label: "Close", 
                     valign: "end", 
-                    onclick: "scripts/close_with_anim settings do-fade-out 0.1 SETTINGS_ANIM_CLASS", 
+                    onclick: `scripts/close_with_anim settings do-fade-out 0.1 SETTINGS_ANIM_CLASS "settings "`, 
                     timeout: "5s",
                     class: "close_btn"  
                 })
             ]),
             stack(#{
-                selected: page,
+                selected: SHOW_SETTING_PAGE,
                 class: "content_space",
                 hexpand: true,
             }, [                
@@ -165,19 +165,18 @@ fn show_settings(page, anim_class) {
 	])
 }
 
-let page = if is_def_var("SHOW_SETTING_PAGE") {
-    SHOW_SETTING_PAGE
-} else {
-    0
-};
-
-let anim_class = if is_def_var("SETTINGS_ANIM_CLASS") {
-    SETTINGS_ANIM_CLASS
-} else {
-    ""
-};
-
 tree([
+    // Dummys
+    poll("SHOW_SETTING_PAGE", #{
+        cmd: "",
+        initial: "0",
+    }),
+
+    poll("SETTINGS_ANIM_CLASS", #{
+        cmd: "",
+        initial: "",
+    }),
+
 	defwindow("settings", #{
         geometry: #{
             x: "175px",
@@ -188,5 +187,5 @@ tree([
         },
         windowtype: "dialog",
         focusable: "ondemand"
-	}, show_settings(page, anim_class))
+	}, show_settings())
 ])

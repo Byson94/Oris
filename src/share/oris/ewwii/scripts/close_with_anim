@@ -4,9 +4,14 @@ WINDOW="$1"
 ANIM="$2"
 DUR="$3"
 CLASS="$4"
+UPDATE_PREFIX="$5"
 
 # play anim
-ewwii update -pi "$CLASS"="$ANIM" -l "$WINDOW" -c . 
+if [[ $UPDATE_PREFIX = "" ]]; then
+    ewwii update "$CLASS"="${ANIM}" -c . 
+else
+    ewwii update "$CLASS"="${UPDATE_PREFIX}${ANIM}" -c . 
+fi
 
 # wait for anim
 sleep "$DUR"

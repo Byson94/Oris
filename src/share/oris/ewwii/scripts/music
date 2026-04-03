@@ -10,9 +10,9 @@ print_title() {
   local title
   title=$(mpc current)
   if [ ${#title} -gt 16 ]; then
-    echo "${title:0:16}..."
+    echo ": ${title:0:16}..."
   else
-    echo "$title"
+    echo ": $title"
   fi
 }
 

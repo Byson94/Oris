@@ -1,6 +1,6 @@
 import "std::env" as env;
 
-fn render(wsp_info) {
+fn render() {
     return box(#{ 
         orientation: "h", 
     }, [
@@ -8,7 +8,7 @@ fn render(wsp_info) {
             class: "top-bar",
         }, [
             box(#{}, [
-                left(wsp_info),
+                left(),
                 center(),
                 right(),
             ])
@@ -16,26 +16,41 @@ fn render(wsp_info) {
     ])
 }
 
-fn left(ws_info) {
-    let ws_info = parse_json(ws_info);
+fn left() {
+    let ws_info = [
+        workspace_1,
+        workspace_2,
+        workspace_3,
+        workspace_4,
+        workspace_5,
+        workspace_6,
+        workspace_7,
+        workspace_8,
+        workspace_9,
+    ];
     let ws_buttons = [];
-    for i in 1..10 {
-        let key = "workspace_" + i;
-        if ws_info[key] == () {
-            ws_info[key] = "·";
-        }
+    for i in 0..9 {
+        // let key = "workspace_" + i;
+        // if ws_info[i] == () {
+        //     ws_info[i] = "·";
+        // }
 
-        let onclick = "";
-        let icon = ws_info[key];
+        let onclick = bound([ws_info, i], |vars| {
+            let ws_info = vars[0];
+            let i = vars[1];
+            let icon = ws_info[i];
 
-        if icon != "⨂" {
-            onclick = `niri msg action focus-workspace ${i}`
-        }
+            if icon != "⨂" {
+                // Niri uses 1-based index
+                return `niri msg action focus-workspace ${i+1}`
+            } else {
+                return ""
+            }
+        });
 
         ws_buttons.push(
-            button(#{ onclick: onclick, label: ws_info[key] })
+            button(#{ onclick: onclick, label: ws_info[i] })
         )
-
     }
 
     box(#{
@@ -75,23 +90,13 @@ fn center() {
 }
 
 fn right() {
-    let time = localsignal(#{ 
-        type: "poll", 
-        initial: "", 
-        cmd: `v=$(date +%H:%M); echo "   $v"`, 
-        interval: "1m" 
-    });
     return box(#{ 
         orientation: "h", 
         space_evenly: false, 
         halign: "end",
         spacing: 10,
     }, [
-        localbind(#{
-            label: time
-        }, [
-            label(#{ text: "", class: "time-wdgt" }),
-        ]),
+        label(#{ text: time, class: "time-wdgt" }),
         button(#{ 
             label: "", 
             class: "power-wdgt", 
@@ -133,13 +138,7 @@ fn draw_slider(icon, onchange, value) {
     ])
 }
 
-fn render_sidebar(volume, date) {
-    let uptime = localsignal(#{
-        type: "poll",
-        cmd: `awk '{printf "Uptime: %dh %dm\n", $1/3600, ($1%3600)/60}' /proc/uptime`,
-        interval: "2m",
-    });
-
+fn render_sidebar() {
     return box(#{
         orientation: "v",
         class: `sidebar-content-box`,
@@ -157,17 +156,15 @@ fn render_sidebar(volume, date) {
             orientation: "v",
             class: "sidebar-text-box"
         }, [
-            localbind(#{
-                label: uptime
-            }, [
-                label(#{ 
-                    text: "", 
-                    class: "sidebar-uptime",
-                    halign: "start"
-                }),
-            ]),
             label(#{ 
-                text: `Date: ${date}`, 
+                text: uptime, 
+                class: "sidebar-uptime",
+                halign: "start"
+            }),
+            label(#{ 
+                text: bound([date], |vars| {
+                    `Date: ${vars[0]}`
+                }),
                 class: "sidebar-date",
                 halign: "start"
             }),
@@ -175,7 +172,7 @@ fn render_sidebar(volume, date) {
     ]);
 }
 
-fn render_cal(day, year) {
+fn render_cal() {
     box(#{
         orientation: "v",
         class: `calendar_popup`
@@ -208,11 +205,30 @@ fn render_app_menu() {
 
 
 tree([
-    listen("wsp_info", #{ initial: "{}", cmd: "scripts/workspace" }),
     poll("date", #{ initial: "", cmd: "date +%d/%m/%Y", interval: "24h" }),
     listen("volume", #{ initial: "", cmd: "scripts/getvol" }),
     poll("day", #{ interval: "20h", cmd: "date '+%d'" }),
     poll("year", #{ interval: "20h", cmd: "date '+%Y'" }),
+    poll("time", #{
+        initial: "Current time", 
+        cmd: `v=$(date +%H:%M); echo "   $v"`, 
+        interval: "1m" 
+    }),
+    poll("uptime", #{
+        cmd: `awk '{printf "Uptime: %dh %dm\n", $1/3600, ($1%3600)/60}' /proc/uptime`,
+        interval: "2m",
+    }),
+
+    // workspaces
+    listen("workspace_1", #{ initial: "{}", cmd: "scripts/workspace 1" }),
+    listen("workspace_2", #{ initial: "{}", cmd: "scripts/workspace 2" }),
+    listen("workspace_3", #{ initial: "{}", cmd: "scripts/workspace 3" }),
+    listen("workspace_4", #{ initial: "{}", cmd: "scripts/workspace 4" }),
+    listen("workspace_5", #{ initial: "{}", cmd: "scripts/workspace 5" }),
+    listen("workspace_6", #{ initial: "{}", cmd: "scripts/workspace 6" }),
+    listen("workspace_7", #{ initial: "{}", cmd: "scripts/workspace 7" }),
+    listen("workspace_8", #{ initial: "{}", cmd: "scripts/workspace 8" }),
+    listen("workspace_9", #{ initial: "{}", cmd: "scripts/workspace 9" }),
 
     // top bar and contents
     defwindow("bar", #{
@@ -220,7 +236,7 @@ tree([
         windowtype: "dock",
         exclusive: true,
         monitor: 0,
-    }, render(wsp_info)),
+    }, render()),
 
     defwindow("power-menu", #{
         geometry: #{
@@ -240,7 +256,7 @@ tree([
         },
         windowtype: "dialog",
         monitor: 0,
-    }, render_sidebar(volume, date)),
+    }, render_sidebar()),
 
     defwindow("calendar_popup", #{
         geometry: #{
@@ -251,5 +267,5 @@ tree([
             height: "150px"
         },
         windowtype: "dialog",
-    }, render_cal(day, year)),
+    }, render_cal()),
 ]);

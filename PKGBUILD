@@ -6,7 +6,6 @@ arch=("x86_64")
 depends=(
   # core libs
   "niri"
-  "oris-uscfg"
   "curl"
   "jq"
   "inotify-tools"
@@ -27,6 +26,7 @@ depends=(
 )
 
 optdepends=(
+  "oris-uscfg: Necessary user configuration"
   "oris-misc-pkgs: Miscellaneous packages providing various applications for general use"
 )
 

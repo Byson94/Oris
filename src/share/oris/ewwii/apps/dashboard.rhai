@@ -1,51 +1,36 @@
 import "std::env" as env;
 import "std::command" as cmd;
 
-fn show_dashboard(selected_noti_page, weather, music, is_playing, extra_classes) {
-    let time = localsignal(#{ 
-        type: "poll", 
-        initial: "", 
-        cmd: "date '+%H:%M'", 
-        interval: "1m" 
-    });
-
-    let uptime = localsignal(#{
-        type: "poll",
-        cmd: `awk '{printf "Uptime: %dh %dm\n", $1/3600, ($1%3600)/60}' /proc/uptime`,
-        interval: "2m",
-    });
-
+fn show_dashboard() {
     let username = env::get_username();
 
-    let play_btn_label = if !(is_playing == "true") { "󰐊" } else { "" };
+    let play_btn_label = bound([is_playing], |vars| {
+        if !(vars[0] == "true") { "󰐊" } else { "" }
+    });
 
-    let weather_json = if weather != "{}" {
-        parse_json(weather)
-    } else {
-        #{
-            weather: "Loading...",
-            temperature: "0.0",
-            message: "Hopefully its a good day!"
-        }
-    };
+    // let weather_json = if weather != "{}" {
+    //     parse_json(weather)
+    // } else {
+    //     #{
+    //         weather: "Loading...",
+    //         temperature: "0.0",
+    //         message: "Hopefully its a good day!"
+    //     }
+    // };
 
 	box(#{
         orientation: "v",
         space_evenly: false,
-        class: `dashboard ${extra_classes}`,
+        class: DASHB_ANIM_CLASS,
     }, [
         // menu bar
         box(#{ class: "header" }, [
-            localbind(#{
-                label: uptime
-            }, [
-                label(#{ text: "", class: "small-font", halign: "start" }),
-            ]),
+            label(#{ text: uptime, class: "small-font", halign: "start" }),
             button(#{ 
                 label: "Close", 
                 halign: "end", 
                 class: "close-btn small-font", 
-                onclick: "scripts/close_with_anim dashboard do-fade-out 0.1 DASHB_ANIM_CLASS" ,
+                onclick: `scripts/close_with_anim dashboard do-fade-out 0.1 DASHB_ANIM_CLASS "dashboard "`,
                 timeout: "5s"
             })
         ]),
@@ -62,11 +47,7 @@ fn show_dashboard(selected_noti_page, weather, music, is_playing, extra_classes)
                     // time widget
                     box(#{ class: "dashboard_time", hexpand: true }, [
                         box(#{ halign: "center" }, [
-                            localbind(#{
-                                label: time
-                            }, [
-                                label(#{ text: "Current Time" })
-                            ])
+                            label(#{ text: standard_time })
                         ])
                     ]),
                 ]),
@@ -81,7 +62,7 @@ fn show_dashboard(selected_noti_page, weather, music, is_playing, extra_classes)
                         // music area
                         box(#{ class: "music_dashb", orientation: "v" }, [
                             // title
-                            label(#{ text: ": " + music, class: "music-title" }),
+                            label(#{ text: music, class: "music-title" }),
                 
                             box(#{ 
                                 space_evenly: false, 
@@ -127,11 +108,16 @@ fn show_dashboard(selected_noti_page, weather, music, is_playing, extra_classes)
                                 space_evenly: false,
                                 spacing: 10
                             }, [
-                                label(#{ 
-                                    text: `󰖐  ${weather_json["weather"]} |   ${weather_json["temperature"]}`, 
-                                    class: "weather-heading" 
+                                label(#{
+                                    widget_name: "weather-and-temperature",
+                                    text: "",
+                                    class: "weather-heading"
                                 }),
-                                label(#{ text: weather_json["message"], class: "weather-msg" })
+                                label(#{
+                                    widget_name: "weather-message",
+                                    text: "",
+                                    class: "weather-msg" 
+                                })
                             ])
                         ]),
                     ]),
@@ -163,7 +149,7 @@ fn show_dashboard(selected_noti_page, weather, music, is_playing, extra_classes)
 
             // notification area
             box(#{ orientation: "v", class: "notification_tray", vexpand: true, hexpand: true }, [
-                stack(#{ selected: selected_noti_page }, [
+                stack(#{ selected: SELECTED_NOTIF_PAGE }, [
                     // no notifications yet page
                     box(#{ 
                         orientation: "v", 
@@ -193,22 +179,25 @@ fn show_dashboard(selected_noti_page, weather, music, is_playing, extra_classes)
 	])
 }
 
-let extra_classes = if is_def_var("DASHB_ANIM_CLASS") {
-    DASHB_ANIM_CLASS
-} else {
-    ""
-};
-
-let selected_noti_page = if is_def_var("SELECTED_NOTIF_PAGE") {
-    SELECTED_NOTIF_PAGE
-} else {
-    ""
-};
-
 tree([
     listen("is_playing", #{ initial: "false", cmd: "scripts/music state" }),
+    listen("__weather__", #{ initial: "{}", cmd: "scripts/weather", interval: "1h" }),
     listen("music", #{ initial: "", cmd: "scripts/music title" }),
-    poll("weather", #{ initial: "{}", cmd: "scripts/weather" }),
+    poll("uptime", #{
+        cmd: `awk '{printf "Uptime: %dh %dm\n", $1/3600, ($1%3600)/60}' /proc/uptime`,
+        interval: "2m",
+    }),
+
+    // Dummys
+    poll("DASHB_ANIM_CLASS", #{
+        cmd: "",
+        initial: "",
+    }),
+
+    poll("SELECTED_NOTIF_PAGE", #{
+        cmd: "",
+        initial: "",
+    }),
 
 	defwindow("dashboard", #{
         geometry: #{
@@ -220,5 +209,5 @@ tree([
         },
         windowtype: "dialog",
         focusable: "ondemand"
-	}, show_dashboard(selected_noti_page, weather, music, is_playing, extra_classes))
+	}, show_dashboard())
 ]);

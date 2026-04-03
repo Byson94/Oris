@@ -1,24 +1,19 @@
-fn render_time(time) {
+fn render_time() {
 	box(#{ halign: "center" }, [
-		localbind(#{
-			label: time
-		}, [
-			label(#{ text: ""})
-		])
+		label(#{ text: standard_time })
 	])
 }
 
-let time = localsignal(#{ 
-    type: "poll", 
-    initial: "", 
-    cmd: `date '+%H:%M'`, 
-    interval: "1m" 
-});
-
 tree([
+	poll("standard_time", #{
+		initial: "", 
+		cmd: `date '+%H:%M'`, 
+		interval: "1m" 
+	}),
+
 	defwindow("time", #{
 		geometry: #{ anchor: "center" },
         stacking: "bg",
         monitor: 0,
-	}, render_time(time))
+	}, render_time())
 ]);
