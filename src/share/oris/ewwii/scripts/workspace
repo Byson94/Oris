@@ -2,29 +2,42 @@
 set -euo pipefail
 
 get_workspace_status() {
-    declare -A ws_status
-    while read -r line; do
-        [[ "$line" =~ ^Output ]] && continue
-        if [[ "$line" =~ \* ]]; then
-            ws_id=$(echo "$line" | tr -d ' *')
-            ws_status[$ws_id]="⬤"
-        else
-            ws_id=$(echo "$line" | tr -d ' ')
-            ws_status[$ws_id]="◯"
-        fi
-    done < <(niri msg workspaces)
+  local current_output=""
+  declare -A ws_status
 
-    echo "${ws_status[$1]:-⨂}"
+  while read -r line; do
+    [[ "$line" =~ ^Output ]] && continue
+
+    if [[ "$line" =~ \* ]]; then
+      ws_id=$(echo "$line" | tr -d ' *')
+      ws_status[$ws_id]="⬤"
+    else
+      ws_id=$(echo "$line" | tr -d ' ')
+      ws_status[$ws_id]="◯"
+    fi
+  done < <(niri msg workspaces)
+
+  json="{"
+  first=true
+  for ws in $(seq 1 10); do
+    [[ "$first" = true ]] && first=false || json+=","
+    json+="\"workspace_$ws\":\"${ws_status[$ws]:-⨂}\""
+  done
+  json+="}"
+  echo "$json"
 }
 
-n="${1:?Usage: $0 <workspace_number>}"
-
-get_workspace_status "$n"
+last_status=""
+get_workspace_status
 
 niri msg event-stream | while read -r line; do
-    case "$line" in
-        *"Workspace focused:"* | *"Workspaces changed:"*)
-            get_workspace_status "$n"
-            ;;
-    esac
+  case "$line" in
+  *"Workspace focused:"* | *"Workspaces changed:"*)
+    current_status=$(get_workspace_status)
+    if [ "$current_status" != "$last_status" ]; then
+      echo "$current_status"
+      last_status="$current_status"
+    fi
+    ;;
+  esac
 done

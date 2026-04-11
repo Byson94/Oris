@@ -17,17 +17,6 @@ fn render() {
 }
 
 fn left() {
-    let ws_info = [
-        workspace_1,
-        workspace_2,
-        workspace_3,
-        workspace_4,
-        workspace_5,
-        workspace_6,
-        workspace_7,
-        workspace_8,
-        workspace_9,
-    ];
     let ws_buttons = [];
     for i in 0..9 {
         // let key = "workspace_" + i;
@@ -36,9 +25,11 @@ fn left() {
         // }
 
         let onclick = bound([ws_info, i], |vars| {
-            let ws_info = vars[0];
+            let ws_info_raw = vars[0];
+            let ws_info = parse_json(ws_info_raw);
             let i = vars[1];
-            let icon = ws_info[i];
+            let key = "workspace_" + (i + 1);
+            let icon = ws_info[key];
 
             if icon != "⨂" {
                 // Niri uses 1-based index
@@ -47,9 +38,17 @@ fn left() {
                 return ""
             }
         });
+        
+        let label = bound([ws_info, i], |vars| {
+            let ws_info = parse_json(vars[0]);
+            let i = vars[1];
+            let key = "workspace_" + (i + 1);
+
+            return ws_info[key]
+        });
 
         ws_buttons.push(
-            button(#{ onclick: onclick, label: ws_info[i] })
+            button(#{ onclick: onclick, label: label })
         )
     }
 
@@ -96,7 +95,7 @@ fn right() {
         halign: "end",
         spacing: 10,
     }, [
-        label(#{ text: time, class: "time-wdgt" }),
+        label(#{ text: bar_time, class: "time-wdgt" }),
         button(#{ 
             label: "", 
             class: "power-wdgt", 
@@ -209,8 +208,8 @@ tree([
     listen("volume", #{ initial: "", cmd: "scripts/getvol" }),
     poll("day", #{ interval: "20h", cmd: "date '+%d'" }),
     poll("year", #{ interval: "20h", cmd: "date '+%Y'" }),
-    poll("time", #{
-        initial: "Current time", 
+    poll("bar_time", #{
+        initial: "00:00", 
         cmd: `v=$(date +%H:%M); echo "   $v"`, 
         interval: "1m" 
     }),
@@ -220,15 +219,7 @@ tree([
     }),
 
     // workspaces
-    listen("workspace_1", #{ initial: "{}", cmd: "scripts/workspace 1" }),
-    listen("workspace_2", #{ initial: "{}", cmd: "scripts/workspace 2" }),
-    listen("workspace_3", #{ initial: "{}", cmd: "scripts/workspace 3" }),
-    listen("workspace_4", #{ initial: "{}", cmd: "scripts/workspace 4" }),
-    listen("workspace_5", #{ initial: "{}", cmd: "scripts/workspace 5" }),
-    listen("workspace_6", #{ initial: "{}", cmd: "scripts/workspace 6" }),
-    listen("workspace_7", #{ initial: "{}", cmd: "scripts/workspace 7" }),
-    listen("workspace_8", #{ initial: "{}", cmd: "scripts/workspace 8" }),
-    listen("workspace_9", #{ initial: "{}", cmd: "scripts/workspace 9" }),
+    listen("ws_info", #{ initial: "{}", cmd: "scripts/workspace" }),
 
     // top bar and contents
     defwindow("bar", #{

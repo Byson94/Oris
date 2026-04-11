@@ -6,7 +6,7 @@ fn render_time() {
 
 tree([
 	poll("standard_time", #{
-		initial: "", 
+		initial: "00:00", 
 		cmd: `date '+%H:%M'`, 
 		interval: "1m" 
 	}),
